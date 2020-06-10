@@ -7,13 +7,7 @@ describe ('visit_url', function() {
 
 
      it('travel_insurance_product-get_quote', function() {
-        cy.visit('https://qa09sts.intertrav.co.uk/travelinsurance/quote/policy-details')
-        const page_title = cy.url().should('include','502 Bad Gateway')
-        if ('page_title' == true) {
-            cy.visit('https://travelinsurance.staysure.co.uk/quote/policy-details  ')
-          } else {
-            cy.wait(1000)    
-          }           
+        cy.visit('https://qa09sts.intertrav.co.uk/travelinsurance/quote/policy-details')      
     })
 
     it('travel_details-single_trip_details_1', function() {
@@ -29,7 +23,7 @@ describe ('visit_url', function() {
         cy.get('#organiserTitle').select('Mr')
         cy.get('input[id=firstname]').should('be.visible').should('be.enabled').type("Madhawa")
         cy.get('input[id=lastname]').should('be.visible').should('be.enabled').type("Ratnayake")
-        cy.get('input[id=email]').should('be.visible').should('be.enabled').type("madhawa@intervest.lk")
+        cy.get('input[id=email]').should('be.visible').should('be.enabled').type("madhawa_ist@yahoo.com")
         cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').type("0771257025")
         cy.get('input[id=postcode]').should('be.visible').should('be.enabled').type("NN47YB")        
     })
