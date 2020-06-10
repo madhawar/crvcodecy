@@ -96,15 +96,21 @@ describe ('visit_url', function() {
     })
 
     it('confirmation-voucher_code', function () {
+        cy.get('#voucherCodeCollapseIcon').should('be.visible').click()
         cy.get('#voucherCode').should('be.visible').should('be.enabled').type("MADHA")
         cy.get('#applyVoucherCode').should('be.visible').should('be.enabled').click()
+        cy.wait(1000)
     })  
 
-    //TODO
-    /*it('confirmation-promo_code', function () {
-        cy.get('.promo-link').should('be.visible').should('be.enabled').click()
+    it('confirmation-promo_code', function () {
+        cy.get('#promoCodeCollapseIcon').should('be.visible').click()
+        cy.get('#promoCode').should('be.visible').should('be.enabled').type("MADHAWA")
+        cy.get('#applyPromoCode').should('be.visible').should('be.enabled').click()
+        cy.wait(1000)
     }) 
 
+    //TODO
+    /*
     it('confirmation_declarations', function () {     
         cy.get('#user-accept').should('be.visible').click()   
         cy.get('#user-declaration').should('be.visible').click()
