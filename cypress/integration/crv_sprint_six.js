@@ -1,4 +1,4 @@
-describe ('visit_url', function() {
+describe ('travel_insurance_web', function() {
 
     beforeEach(function() {
         Cypress.Cookies.preserveOnce('JSESSIONID')
@@ -7,7 +7,9 @@ describe ('visit_url', function() {
 
 
      it('travel_insurance_product-get_quote', function() {
-        cy.visit('https://qa09sts.intertrav.co.uk/travelinsurance/quote/policy-details')      
+        //cy.visit('https://qa09sts.intertrav.co.uk/travelinsurance/quote/policy-details')
+        cy.visit('https://qa09avn.intertrav.co.uk/travelinsurance/quote/policy-details') 
+        //cy.visit('https://qa09exp.intertrav.co.uk/travelinsurance/quote/policy-details')
     })
 
     it('travel_details-single_trip_details_1', function() {
@@ -67,8 +69,16 @@ describe ('visit_url', function() {
         cy.wait(1000)
     })
 
-    it('quote_results-package_amt_c', function() {
-        cy.get('#ANNUAL_MULTI_TRIP_COMPREHENSIVE_BTN').should('be.visible').should('be.enabled').click()
+    it('quote_results-package_amt', function() {        
+        cy.title().should('include', 'Avanti').then((val) => {
+            if (val) {
+                cy.get('#ANNUAL_MULTI_TRIP_DELUXE_BTN').should('be.visible').should('be.enabled').click()
+              }
+            else {
+                cy.get('#ANNUAL_MULTI_TRIP_COMPREHENSIVE_BTN').should('be.visible').should('be.enabled').click()
+            }
+        })       
+        
     })
 
     it('quote_results-submit', function () {
@@ -77,7 +87,7 @@ describe ('visit_url', function() {
 
     it('quote_results-cancellation-popup', function () {
         cy.get('#cancellationCoverChangeSubmit').should('be.visible').should('be.enabled').click()
-        cy.wait(1000)
+        cy.wait(2000)
     })
 
     it('confirmation-org_details_3', function () {        
@@ -102,12 +112,13 @@ describe ('visit_url', function() {
         cy.wait(1000)
     })  
 
-    it('confirmation-promo_code', function () {
+    //DISABLED PROMOCODE TEMPORARILY
+    /*it('confirmation-promo_code', function () {
         cy.get('#promoCodeCollapseIcon').should('be.visible').click()
         cy.get('#promoCode').should('be.visible').should('be.enabled').type("MADHAWA")
         cy.get('#applyPromoCode').should('be.visible').should('be.enabled').click()
         cy.wait(1000)
-    }) 
+    }) */
 
     //TODO
     /*
