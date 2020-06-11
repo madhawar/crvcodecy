@@ -1,27 +1,37 @@
 /// <reference types="Cypress" />
 
+import TravelDetails from './PageObjects/TravelDetails'
 import VoucherEmail from './VoucherEmail'
 
 describe ('Travel Insurance Web', function() {
+
+    before(function() {
+        
+    })
 
     beforeEach(function() {
         Cypress.Cookies.preserveOnce('JSESSIONID')
         //Cypress.Cookies.debug(true)
         //cy.get('#voucher-header-box').should('not.exist')
+        cy.fixture('organiser').then(function(data) {
+            this.data = data
+        })
     })
 
     it('Get Quote', function () {
-            const td = new VoucherEmail()
-            td.visitSTS()
-            //cy.title().should('include', 'Staysure')
-            //cy.wait(2000)
-            
+        /*
+        CRV Sprint 6 Voucher Email Link
+        const crv = new VoucherEmail()
+        crv.visitSTS()
+        cy.wait(2000)
+        cy.get('#voucherApplyProceed').should('be.visible').should('be.enabled').click()
+        */
+
+       cy.web('qa09','sts')   
     })
 
 
     it('Travel Details', function() {
-        cy.get('#voucherApplyProceed').should('be.visible').should('be.enabled').click()
-
         cy.get('#cover > .question-container > :nth-child(2) > label').click()
         cy.get('#going-cruise > div > div:nth-child(3) > label').click()
         cy.get('#multiple-destination > .question-container > :nth-child(3)')
@@ -29,12 +39,12 @@ describe ('Travel Insurance Web', function() {
         cy.get('#cover-for > div > div:nth-child(2) > label').click()
         cy.get('input[id=traveler_age_1]').should('be.visible').should('be.enabled').type("31")
 
-        cy.get('#organiserTitle').select('Mr')
-        cy.get('input[id=firstname]').should('be.visible').should('be.enabled').type("Madhawa")
-        cy.get('input[id=lastname]').should('be.visible').should('be.enabled').type("Ratnayake")
-        cy.get('input[id=email]').should('be.visible').should('be.enabled').type("madhawa_ist@yahoo.com")
-        cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').type("0771257025")
-        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').type("NN47YB")        
+        cy.get('#organiserTitle').select(this.data.organiserTitle)
+        cy.get('input[id=firstname]').should('be.visible').should('be.enabled').type(this.data.firstname)
+        cy.get('input[id=lastname]').should('be.visible').should('be.enabled').type(this.data.lastname)
+        cy.get('input[id=email]').should('be.visible').should('be.enabled').type(this.data.email)
+        cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').type(this.data.dayTimeTelephone)
+        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').type(this.data.postcode)        
 
         cy.get('input[id=datepicker-departure-text]').should('be.visible').should('be.enabled').type("14/06/2020")
 
@@ -49,9 +59,9 @@ describe ('Travel Insurance Web', function() {
     })
 
     it('Medical Declaration', function() {     
-        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select("Mr")
-        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').type("Madhawa")
-        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').type("Ratnayake") 
+        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select(this.data.organiserTitle)
+        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').type(this.data.firstname)
+        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').type(this.data.lastname) 
         
         cy.get('#checkbox-accept-label').click()
         cy.get(':nth-child(2) > label').click()
@@ -108,5 +118,8 @@ describe ('Travel Insurance Web', function() {
         //cy.wait(2000)
     })
 
-})
+    it('Voucher Header', function() {
+        cy.get('#voucher-header-box').should('be.visible')
+    })
 
+})
