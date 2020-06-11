@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-describe('Custom Command', function() {
+describe('Intertrav HUB', function() {
 
-    it('CustomTest', function() {
-        cy.staysure()
+    it('Login', function() {
+        cy.staysure('stay','January*27','prelive')
     })
 
 })

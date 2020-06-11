@@ -6,10 +6,10 @@ describe('Travel Insurance Web', function() {
 
     it('Travel Details', function () {
         const td = new TravelDetails()
-        td.visitSTS()
+        cy.web('qa09','sts')
         cy.title().should('include', 'Staysure')
         td.cruiseNo()
         td.multipleNo()
     })
-    
+
 })
