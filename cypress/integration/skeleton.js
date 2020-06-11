@@ -12,7 +12,7 @@ describe ('travel_insurance_web', function() {
 
     it('Travel Details', function () {
             const td = new TravelDetails()
-            td.visitAVN()
+            td.visitSTS()
             //cy.title().should('include', 'Staysure')
     })
 
@@ -49,7 +49,7 @@ describe ('travel_insurance_web', function() {
 
     it('travel_details-submit', function() {
         cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').type("30/06/2020")  
-        cy.get('input[id=btnSubmit]').click()
+        cy.get('#btnSubmit').click()
         cy.wait(2000)
     })    
 
@@ -69,9 +69,9 @@ describe ('travel_insurance_web', function() {
     })
 
     it('medical_declaration-confirmation_popup', function() {
-        //cy.wait(1000)
+        cy.wait(2000)
         cy.get('#medical_dec_submit_btn').should('be.visible').should('be.enabled').click()
-        cy.wait(1000)
+        cy.wait(2000)
     })
 
     it('quote_results-package_amt', function() {        
@@ -114,16 +114,20 @@ describe ('travel_insurance_web', function() {
         cy.get('#voucherCodeCollapseIcon').should('be.visible').click()
         cy.get('#voucherCode').should('be.visible').should('be.enabled').type("MADHA")
         cy.get('#applyVoucherCode').should('be.visible').should('be.enabled').click()
-        cy.wait(1000)
+        cy.get('#voucher-header-box').should('be.visible')
+        cy.wait(2000)
+
+        cy.get('#voucher-header-box').should('be.visible')
     })  
 
-    //DISABLED PROMOCODE TEMPORARILY
-    /*it('confirmation-promo_code', function () {
+    it('confirmation-promo_code', function () {
         cy.get('#promoCodeCollapseIcon').should('be.visible').click()
         cy.get('#promoCode').should('be.visible').should('be.enabled').type("MADHAWA")
         cy.get('#applyPromoCode').should('be.visible').should('be.enabled').click()
-        cy.wait(1000)
-    }) */
+        cy.wait(2000)
+
+        cy.get('#voucher-header-box').should('be.visible')
+    })
 
     //TODO
     /*
