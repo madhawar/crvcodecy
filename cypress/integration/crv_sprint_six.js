@@ -1,3 +1,7 @@
+/// <reference types="Cypress" />
+
+import TravelDetails from './PageObjects/TravelDetails'
+
 describe ('travel_insurance_web', function() {
 
     beforeEach(function() {
@@ -6,11 +10,12 @@ describe ('travel_insurance_web', function() {
     })
 
 
-     it('travel_insurance_product-get_quote', function() {
-        //cy.visit('https://qa09sts.intertrav.co.uk/travelinsurance/quote/policy-details')
-        cy.visit('https://qa09avn.intertrav.co.uk/travelinsurance/quote/policy-details') 
-        //cy.visit('https://qa09exp.intertrav.co.uk/travelinsurance/quote/policy-details')
+    it('Travel Details', function () {
+            const td = new TravelDetails()
+            td.visitAVN()
+            //cy.title().should('include', 'Staysure')
     })
+
 
     it('travel_details-single_trip_details_1', function() {
         cy.get('#cover > .question-container > :nth-child(2) > label').click()
