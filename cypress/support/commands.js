@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("staysure", (username, password) => {
+    cy.visit('https://qa09sts.intertrav.co.uk/sts/login')
+    cy.get('input[name=username]').type("stay")
+    cy.get('input[name=password]').type("January*27")
+    cy.get('input[name=submit]').click()
+})
+
+Cypress.Commands.add("avanti", (username, password) => {
+    cy.visit('https://qa09avn.intertrav.co.uk/avanti/login')
+    cy.get('input[name=username]').type("avanti")
+    cy.get('input[name=password]').type("January*27")
+    cy.get('input[name=submit]').click()
+})
+
+Cypress.Commands.add("expat", (username, password) => {
+    cy.visit('https://qa09exp.intertrav.co.uk/expat/login')
+    cy.get('input[name=username]').type("stay")
+    cy.get('input[name=password]').type("January*27")
+    cy.get('input[name=submit]').click()
+})
