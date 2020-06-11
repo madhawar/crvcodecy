@@ -1,0 +1,11 @@
+{
+    "promocode" : "MADHAWA",
+    "promocode_invalid" : "",
+    "promocode_zero" : "",
+    "promocode_expired" : "",
+
+    "voucher" : "MADHA",
+    "voucher_invalid" : "VOUCHER",
+    "voucher_zero" : "ZERO",
+    "voucher_expired" : "EXPIRED"
+}

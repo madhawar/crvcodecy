@@ -8,5 +8,12 @@
     "lastname": "Undukapuchcha",
     "dayTimeTelephone": "0771257025",
     "email": "madhawa_ist@yahoo.com",
-    "postcode": "NN47YB"    
+    "postcode": "NN47YB",
+    "year" : "1989",
+    "month" : "4",
+    "day" : "27",
+    
+    "address_1" : "345 Cave Stone Road",
+    "city" : "Bedrock"
+
 }

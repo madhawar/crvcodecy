@@ -13,55 +13,64 @@ describe ('Travel Insurance Web', function() {
         Cypress.Cookies.preserveOnce('JSESSIONID')
         //Cypress.Cookies.debug(true)
         //cy.get('#voucher-header-box').should('not.exist')
-        cy.fixture('organiser').then(function(data) {
-            this.data = data
+
+        cy.fixture('organiser').then(function(organiser) {
+            this.organiser = organiser
+        })
+
+        cy.fixture('quote').then(function(quote) {
+            this.quote = quote
+        })
+
+        cy.fixture('vouchers').then(function(vouchers) {
+            this.vouchers = vouchers
         })
     })
 
     it('Get Quote', function () {
-        /*
-        CRV Sprint 6 Voucher Email Link
+        /* CRV Sprint 6 Voucher Email Link        
         const crv = new VoucherEmail()
         crv.visitSTS()
         cy.wait(2000)
         cy.get('#voucherApplyProceed').should('be.visible').should('be.enabled').click()
         */
 
-       cy.web('qa09','sts')   
+        /* https://' + server + domain + '.intertrav.co.uk/travelinsurance/quote/policy-details */
+        cy.web('qa09','sts')
     })
 
 
     it('Travel Details', function() {
         cy.get('#cover > .question-container > :nth-child(2) > label').click()
         cy.get('#going-cruise > div > div:nth-child(3) > label').click()
-        cy.get('#multiple-destination > .question-container > :nth-child(3)')
+        //cy.get('#multiple-destination > .question-container > :nth-child(3)').click()
 
         cy.get('#cover-for > div > div:nth-child(2) > label').click()
-        cy.get('input[id=traveler_age_1]').should('be.visible').should('be.enabled').type("31")
+        cy.get('input[id=traveler_age_1]').should('be.visible').should('be.enabled').clear().type(this.organiser.traveler_1)
 
-        cy.get('#organiserTitle').select(this.data.organiserTitle)
-        cy.get('input[id=firstname]').should('be.visible').should('be.enabled').type(this.data.firstname)
-        cy.get('input[id=lastname]').should('be.visible').should('be.enabled').type(this.data.lastname)
-        cy.get('input[id=email]').should('be.visible').should('be.enabled').type(this.data.email)
-        cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').type(this.data.dayTimeTelephone)
-        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').type(this.data.postcode)        
+        cy.get('#organiserTitle').select(this.organiser.organiserTitle)
+        cy.get('input[id=firstname]').should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
+        cy.get('input[id=lastname]').should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
+        cy.get('input[id=email]').should('be.visible').should('be.enabled').clear().type(this.organiser.email)
+        cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
+        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)        
 
-        cy.get('input[id=datepicker-departure-text]').should('be.visible').should('be.enabled').type("14/06/2020")
+        cy.get('input[id=datepicker-departure-text]').should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
-        cy.get('#countrySearchInput').type("France")
+        cy.get('#countrySearchInput').clear().type(this.quote.country_1)
         cy.get('#countrySearchInput').type('{downarrow}{enter}')
-        cy.get('#multiple-destination > .question-container > :nth-child(3)')
+        cy.get('#multiple-destination > .question-container > :nth-child(3)').click()
 
-        cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').type("30/06/2020")
+        cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
         cy.get('#btnSubmit').click()
         cy.wait(2000)
     })
 
     it('Medical Declaration', function() {     
-        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select(this.data.organiserTitle)
-        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').type(this.data.firstname)
-        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').type(this.data.lastname) 
+        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
+        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
+        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.lastname) 
         
         cy.get('#checkbox-accept-label').click()
         cy.get(':nth-child(2) > label').click()
@@ -91,17 +100,17 @@ describe ('Travel Insurance Web', function() {
     })
 
      it('Confirmation', function () {        
-        cy.get('#firstLineOfAddress').should('be.visible').should('be.enabled').type("345 Cave Stone Road")
-        cy.get('#city').should('be.visible').should('be.enabled').type("Bedrock")
+        cy.get('#firstLineOfAddress').should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
+        cy.get('#city').should('be.visible').should('be.enabled').clear().type(this.organiser.city)
 
-        cy.get('#year').select('1989').should('have.value', '1989')
-        cy.get('#month').select('4').should('have.value', '4')
-        cy.get('#day').select('27').should('have.value', '27')
+        cy.get('#year').select(this.organiser.year)//.should('have.value', '1989')
+        cy.get('#month').select(this.organiser.month)//.should('have.value', '4')
+        cy.get('#day').select(this.organiser.day)//.should('have.value', '27')
 
         //cy.get('#creditCardType').select('1').should('have.value', '1')
         
         cy.get('#promoCodeCollapseIcon').should('be.visible').click()
-        cy.get('#promoCode').should('be.visible').should('be.enabled').type("MADHAWA")
+        cy.get('#promoCode').should('be.visible').should('be.enabled').clear().type(this.vouchers.promocode)
         cy.get('#applyPromoCode').should('be.visible').should('be.enabled').click()
         cy.wait(2000)
 
@@ -111,11 +120,32 @@ describe ('Travel Insurance Web', function() {
         //cy.get('#makePayment').should('be.visible').should('be.enabled').click()
     })
 
-    it('Apply Voucher', function() {
+    it('Apply Zero Voucher', function() {       
         cy.get('#voucherCodeCollapseIcon').should('be.visible').click()
-        cy.get('#voucherCode').should('be.visible').should('be.enabled').type("MADHA")
+        cy.get('#voucherCode').should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_zero)
         cy.get('#applyVoucherCode').should('be.visible').should('be.enabled').click()
-        //cy.wait(2000)
+        cy.get('#voucherCodeError').should('be.visible').should('have.text', 'Voucher Code has been used and no further credit remaining');
+    })
+
+    it('Apply Expired Voucher', function() {       
+        cy.get('#voucherCodeCollapseIcon').should('be.visible').click()
+        cy.get('#voucherCode').should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_expired)
+        cy.get('#applyVoucherCode').should('be.visible').should('be.enabled').click()
+        cy.get('#voucherCodeError').should('be.visible').should('have.text', 'Voucher Code has been used and no further credit remaining');
+    })
+
+    it('Apply Invalid Voucher', function() {       
+        cy.get('#voucherCodeCollapseIcon').should('be.visible').click()
+        cy.get('#voucherCode').should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_invalid)
+        cy.get('#applyVoucherCode').should('be.visible').should('be.enabled').click()
+        cy.get('#voucherCodeError').should('be.visible').should('have.text', 'Voucher Code has been used and no further credit remaining');
+    })
+
+    it('Apply Valid Voucher', function() {       
+        cy.get('#voucherCodeCollapseIcon').should('be.visible').click()
+        cy.get('#voucherCode').should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher)
+        cy.get('#applyVoucherCode').should('be.visible').should('be.enabled').click()
+        cy.get('#voucherCodeError').should('be.visible').should('have.text', 'Voucher Code has been used and no further credit remaining');
     })
 
     it('Voucher Header', function() {
