@@ -50,4 +50,4 @@ You can always Google, nevertheless for a start I suggest following YouTube chan
 ```
 
 ## Disclaimer
-[![Meme](https://i.imgur.com/Z8JPw0w.jpg)]()
+[![Meme](https://github.com/madhawar/crvcodecy/blob/master/meme.jpg)]()
