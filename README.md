@@ -33,6 +33,19 @@ I use these extensions on VSCode. These are optional.
 4. One Dark Pro https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme
 5. vscode-icons https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
 ```
+Because I don't want screenshots and video recordings when tests fail, I've added this on support > index.js
+
+```bash
+Cypress.Screenshot.defaults({
+    screenshotOnRunFailure: false
+  })
+```
+...and on cypress.json
+
+```bash
+"video": false,
+"screenshotOnRunFailure": false
+```
 
 ## Learning
 
@@ -40,6 +53,12 @@ I found Cypress documentation very helpful, as well as the usual Stack Overflow.
 
 ```bash
 https://github.com/cypress-io/cypress-realworld-app
+```
+
+Don't forget to check Cypress blog and these recipes when you're coding.
+
+```bash
+https://github.com/cypress-io/cypress-example-recipes
 ```
 
 You can always Google, nevertheless for a start I suggest following YouTube channels to get started swiftly.
