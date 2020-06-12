@@ -3,10 +3,32 @@
 import TravelDetails from './PageObjects/TravelDetails'
 import VoucherEmail from './VoucherEmail'
 
+describe ('Voucheer Email', function () {
+
+    beforeEach(function() {
+        Cypress.Cookies.preserveOnce('JSESSIONID')
+    })
+
+    after(function() {
+        
+    })
+
+    it('Click Email Link', function () {  
+        const crv = new VoucherEmail()
+        crv.visitSTS()
+        cy.wait(2000)        
+    })
+
+    it('Redeem Voucher', function() {
+        cy.get('#voucherApplyProceed').should('be.visible').should('be.enabled').click()
+    })
+})
+
 describe ('Travel Insurance Web', function() {
 
     before(function() {
-        
+        //https://' + server + domain + '.intertrav.co.uk/travelinsurance/quote/policy-details
+        //cy.web('qa09','sts')
     })
 
     beforeEach(function() {
@@ -21,21 +43,13 @@ describe ('Travel Insurance Web', function() {
         cy.fixture('quote').then(function(quote) {
             this.quote = quote
         })
-
     })
-
+    /*
     it('Get Quote', function () {
-        /* CRV Sprint 6 Voucher Email Link        
-        const crv = new VoucherEmail()
-        crv.visitSTS()
-        cy.wait(2000)
-        cy.get('#voucherApplyProceed').should('be.visible').should('be.enabled').click()
-        */
-
-        /* https://' + server + domain + '.intertrav.co.uk/travelinsurance/quote/policy-details */
+        https://' + server + domain + '.intertrav.co.uk/travelinsurance/quote/policy-details
         cy.web('qa09','sts')
     })
-
+    */
     it('Travel Details', function() { 
         cy.get('#cover > .question-container > :nth-child(2) > label').click()
         cy.get('#going-cruise > div > div:nth-child(3) > label').click()
