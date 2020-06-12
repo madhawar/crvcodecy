@@ -1,13 +1,13 @@
 {
-    "traveler_1": "31",
-
     "departure": "14/06/2020",
     "return": "30/06/2020",
 
     "country_1": "France",
     "country_2": "Turkey",
     "country_3": "Australia",
-    "country_4": "Canada"
+    "country_4": "Canada",
 
+    "traveller_1": "31",
 
+    "promocode": "MADHAWA"
 }

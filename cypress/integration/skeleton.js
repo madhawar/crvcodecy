@@ -2,28 +2,28 @@
 
 import TravelDetails from './PageObjects/TravelDetails'
 
-describe ('travel_insurance_web', function() {
+describe('travel_insurance_web', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
         Cypress.Cookies.preserveOnce('JSESSIONID')
         //Cypress.Cookies.debug(true)
     })
 
 
     it('Travel Details', function () {
-            const td = new TravelDetails()
-            td.visitSTS()
-            //cy.title().should('include', 'Staysure')
+        const td = new TravelDetails()
+        td.visitSTS()
+        //cy.title().should('include', 'Staysure')
     })
 
 
-    it('travel_details-single_trip_details_1', function() {
+    it('travel_details-single_trip_details_1', function () {
         cy.get('#cover > .question-container > :nth-child(2) > label').click()
         cy.get('#going-cruise > div > div:nth-child(3) > label').click()
         cy.get('#multiple-destination > .question-container > :nth-child(3)')
     })
 
-    it('confirmation-org_details_1', function() {      
+    it('confirmation-org_details_1', function () {
         cy.get('#cover-for > div > div:nth-child(2) > label').click()
         cy.get('input[id=traveler_age_1]').should('be.visible').should('be.enabled').type("31")
 
@@ -32,58 +32,57 @@ describe ('travel_insurance_web', function() {
         cy.get('input[id=lastname]').should('be.visible').should('be.enabled').type("Ratnayake")
         cy.get('input[id=email]').should('be.visible').should('be.enabled').type("madhawa_ist@yahoo.com")
         cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').type("0771257025")
-        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').type("NN47YB")        
+        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').type("NN47YB")
     })
 
-    it('travel_details-single_trip_details_2', function() {
+    it('travel_details-single_trip_details_2', function () {
         cy.get('input[id=datepicker-departure-text]').should('be.visible').should('be.enabled').type("14/06/2020")
-              
+
     })
 
-    it('travel_details-single_trip_details_3', function() {
+    it('travel_details-single_trip_details_3', function () {
         cy.get('#countrySearchInput').type("France")
         cy.get('#countrySearchInput').type('{downarrow}{enter}')
         cy.get('#multiple-destination > .question-container > :nth-child(3)')
-        
+
     })
 
-    it('travel_details-submit', function() {
-        cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').type("30/06/2020")  
+    it('travel_details-submit', function () {
+        cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').type("30/06/2020")
         cy.get('#btnSubmit').click()
         cy.wait(2000)
-    })    
-
-    it('medical_declaration-travellers_details', function() {        
-        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select("Mr")
-        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').type("Madhawa")
-        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').type("Ratnayake")        
     })
 
-    it('medical_declaration-medical_declaration', function() {
+    it('medical_declaration-travellers_details', function () {
+        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select("Mr")
+        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').type("Madhawa")
+        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').type("Ratnayake")
+    })
+
+    it('medical_declaration-medical_declaration', function () {
         cy.get('#checkbox-accept-label').click()
         cy.get(':nth-child(2) > label').click()
     })
 
-    it('medical_declaration-submit', function() {
+    it('medical_declaration-submit', function () {
         cy.get(':nth-child(6) > .btn').click()
     })
 
-    it('medical_declaration-confirmation_popup', function() {
+    it('medical_declaration-confirmation_popup', function () {
         cy.wait(2000)
         cy.get('#medical_dec_submit_btn').should('be.visible').should('be.enabled').click()
         cy.wait(2000)
     })
 
-    it('quote_results-package_amt', function() {        
+    it('quote_results-package_amt', function () {
         cy.title().should('include', 'Avanti').then((val) => {
             if (val) {
                 cy.get('#ANNUAL_MULTI_TRIP_DELUXE_BTN').should('be.visible').should('be.enabled').click()
-              }
-            else {
+            } else {
                 cy.get('#ANNUAL_MULTI_TRIP_COMPREHENSIVE_BTN').should('be.visible').should('be.enabled').click()
             }
-        })       
-        
+        })
+
     })
 
     it('quote_results-submit', function () {
@@ -95,7 +94,7 @@ describe ('travel_insurance_web', function() {
         cy.wait(2000)
     })
 
-    it('confirmation-org_details_3', function () {        
+    it('confirmation-org_details_3', function () {
         cy.get('#firstLineOfAddress').should('be.visible').should('be.enabled').type("345 Cave Stone Road")
         cy.get('#city').should('be.visible').should('be.enabled').type("Bedrock")
     })
@@ -118,7 +117,7 @@ describe ('travel_insurance_web', function() {
         cy.wait(2000)
 
         cy.get('#voucher-header-box').should('be.visible')
-    })  
+    })
 
     it('confirmation-promo_code', function () {
         cy.get('#promoCodeCollapseIcon').should('be.visible').click()
@@ -143,4 +142,3 @@ describe ('travel_insurance_web', function() {
     })*/
 
 })
-
