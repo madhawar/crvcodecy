@@ -70,15 +70,6 @@ describe('Travel Insurance Web', function () {
 
         cy.get('#cancellationCoverChangeSubmit').should('be.visible').should('be.enabled').click()
         cy.wait(2500)
-
-        /*        cy.title().should('include', 'Avanti').then((val) => {
-                    if (val) {
-                        cy.get('#ANNUAL_MULTI_TRIP_DELUXE_BTN').should('be.visible').should('be.enabled').click()
-                      }
-                    else {
-                        cy.get('#ANNUAL_MULTI_TRIP_COMPREHENSIVE_BTN').should('be.visible').should('be.enabled').click()
-                    }
-                }) */
     })
 
     it('Confirmation', function () {
