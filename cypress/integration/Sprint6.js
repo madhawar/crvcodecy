@@ -160,7 +160,7 @@ describe('Voucher Code', function() {
     })
 
     it('Expired Voucher Error Message', function() {
-        cy.get('#voucher-code').should('be.visible')
+        cy.get('#voucher-code').should('be.visible') // todo add contains
     })
 
     it('Apply Invalid Voucher', function() {       
