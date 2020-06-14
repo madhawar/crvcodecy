@@ -1,6 +1,10 @@
 /// <reference types="Cypress" />
 
 class TravelDetails {
+
+    visit() {
+        cy.visit('https://travelinsurance.staysure.co.uk/quote/policy-details')
+    }
     
     visitSTS() {
         cy.visit('https://qa09sts.intertrav.co.uk/travelinsurance/quote/policy-details')
@@ -15,19 +19,19 @@ class TravelDetails {
     }
 
     policyST() {
-        cy.get('#cover > .question-container > :nth-child(2) > label').click()
+        return cy.get('#cover > .question-container > :nth-child(2) > label').click()
     }
 
     cruiseNo() {
-        cy.get('#going-cruise > div > div:nth-child(3) > label').click()
+        return cy.get('#going-cruise > div > div:nth-child(3) > label').click()
     }
 
     multipleNo() {
-        cy.get('#multiple-destination > .question-container > :nth-child(3)')
+        return cy.get('#multiple-destination > .question-container > :nth-child(3)')
     }
 
     partyIndividual() {
-        cy.get('#cover-for > div > div:nth-child(2) > label').click()
+        return cy.get('#cover-for > div > div:nth-child(2) > label').click()
     }    
 
 }

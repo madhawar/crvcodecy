@@ -46,7 +46,6 @@ describe ('Travel Insurance Web', function() {
     })
     /*
     it('Get Quote', function () {
-        https://' + server + domain + '.intertrav.co.uk/travelinsurance/quote/policy-details
         cy.web('qa09','sts')
     })
     */
