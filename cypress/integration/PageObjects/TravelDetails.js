@@ -19,11 +19,11 @@ class TravelDetails {
     }
 
     policyST() {
-        return cy.get('#cover > .question-container > :nth-child(2) > label').click()
+        return cy.get('#cover > .question-container > :nth-child(2) > label')
     }
 
     cruiseNo() {
-        return cy.get('#going-cruise > div > div:nth-child(3) > label').click()
+        return cy.get('#going-cruise > div > div:nth-child(3) > label')
     }
 
     multipleNo() {
@@ -31,7 +31,7 @@ class TravelDetails {
     }
 
     partyIndividual() {
-        return cy.get('#cover-for > div > div:nth-child(2) > label').click()
+        return cy.get('#cover-for > div > div:nth-child(2) > label')
     }    
 
 }
