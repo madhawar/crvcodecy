@@ -173,8 +173,8 @@ describe('Sprint 6 Voucher', function () {
     })
 
     it('Close voucher box', function() {
-        cy.get('.close-vc > .fa').click()
-        cy.get('#voucherRemoveProceed').click()
+        cf.closeVoucher().click()
+        cf.closeVoucherConf().click()
         cy.wait(4000)
     })
 

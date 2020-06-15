@@ -20,12 +20,16 @@ class Confirmation {
         return cy.get('#voucher-header-box')
     }
 
-    purchasePolicy() {
-        return cy.get('#makePayment')
+    closeVoucher() {
+        return cy.get('.close-vc > .fa')
     }
 
-    createPolicy() {
+    closeVoucherConf() {
+        return cy.get('#voucherRemoveProceed')
+    }
 
+    purchasePolicy() {
+        return cy.get('#makePayment')
     }
 
 }
