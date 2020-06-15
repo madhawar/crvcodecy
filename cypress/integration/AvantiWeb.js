@@ -195,6 +195,8 @@ describe('Sprint 6 Voucher', function () {
 
     it('Create Policy', function() {
         cf.purchasePolicy().should('be.visible').contains('Create Policy').click()
+        cy.wait(4000)
+        cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
     })
 
 })
