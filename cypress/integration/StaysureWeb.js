@@ -5,17 +5,17 @@ import VoucherEmail from './VoucherEmail'
 
 //Cypress.config('baseUrl', 'https://qa09sts.intertrav.co.uk/travelinsurance/quote')
 
-describe('Travel Insurance Web', function () {
-
-    beforeEach(function () {
-        cy.fixture('organiser').then(function (organiser) {
-            this.organiser = organiser
-        })
-
-        cy.fixture('quote').then(function (quote) {
-            this.quote = quote
-        })
+beforeEach(function () {
+    cy.fixture('organiser').then(function (organiser) {
+        this.organiser = organiser
     })
+
+    cy.fixture('quote').then(function (quote) {
+        this.quote = quote
+    })
+})
+
+describe('Travel Insurance Web', function () {    
 
     it('Get Quote', function () {
         cy.web('qa09', 'sts')
@@ -25,28 +25,30 @@ describe('Travel Insurance Web', function () {
     it('Travel Details', function () {
         cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
 
-        cy.get('#cover > .question-container > :nth-child(2) > label').click()
-        cy.get('#going-cruise > div > div:nth-child(3) > label').click()
+        const td = new TravelDetails()
 
-        cy.get('#cover-for > div > div:nth-child(2) > label').click()
-        cy.get('input[id=traveler_age_1]').should('be.visible').should('be.enabled').clear().type(this.quote.traveller_1)
+        td.policyST().click()
+        td.cruiseNo().click()
 
-        cy.get('#organiserTitle').select(this.organiser.organiserTitle)
-        cy.get('input[id=firstname]').should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
-        cy.get('input[id=lastname]').should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        cy.get('input[id=email]').should('be.visible').should('be.enabled').clear().type(this.organiser.email)
-        cy.get('input[id=dayTimeTelephone]').should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
-        cy.get('input[id=postcode]').should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
+        td.partyIndividual().click()
+        td.traveller1Age().should('be.visible').should('be.enabled').clear().type(this.quote.traveller_1)
 
-        cy.get('input[id=datepicker-departure-text]').should('be.visible').should('be.enabled').clear().type(this.quote.departure)
+        td.orgTitle().select(this.organiser.organiserTitle)
+        td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
+        td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.email)
+        td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
+        td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
-        cy.get('#countrySearchInput').clear().type(this.quote.country_1)
-        cy.get('#countrySearchInput').type('{downarrow}{enter}')
-        cy.get('#multiple-destination > .question-container > :nth-child(3)').click()
+        td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
-        cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').clear().type(this.quote.return)
+        td.destination0().clear().type(this.quote.country_1)
+        td.destination0().type('{downarrow}{enter}')
+        td.multipleNo().click()
 
-        cy.get('#btnSubmit').click()        
+        td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
+
+        td.submitButton().should('be.visible').should('be.enabled').click()        
         cy.wait(4000)
     })
 
