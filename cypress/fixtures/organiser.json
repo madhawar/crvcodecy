@@ -2,7 +2,6 @@
     "password": "January*27",
     "stay": "stay",
     "avanti": "avanti",
-
     "organiserTitle": "Mr",
     "firstname": "Kapila",
     "lastname": "Undukapuchcha",
@@ -12,14 +11,6 @@
     "year": "1989",
     "month": "4",
     "day": "27",
-
     "address_1": "345 Cave Stone Road",
-    "city": "Bedrock",
-
-    "CARD": "4111111111111111",
-    "CVV": "737",
-    "MM": "10",
-    "YY": "2020",
-    "NAME": "KAPILA UNDUKAPUCHCHA"
-
+    "city": "Bedrock"
 }

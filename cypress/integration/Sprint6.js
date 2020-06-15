@@ -3,10 +3,12 @@
 import TravelDetails from './PageObjects/TravelDetails'
 import VoucherEmail from './VoucherEmail'
 
+//Cypress.config('baseUrl', 'https://qa09sts.intertrav.co.uk/travelinsurance/quote')
+
 describe ('Voucheer Email', function () {
 
     beforeEach(function() {
-        Cypress.Cookies.preserveOnce('JSESSIONID')
+        //Cypress.Cookies.preserveOnce('JSESSIONID')
     })
 
     after(function() {
@@ -50,6 +52,8 @@ describe ('Travel Insurance Web', function() {
     })
     */
     it('Travel Details', function() { 
+        cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
+
         cy.get('#cover > .question-container > :nth-child(2) > label').click()
         cy.get('#going-cruise > div > div:nth-child(3) > label').click()
         //cy.get('#multiple-destination > .question-container > :nth-child(3)').click()
@@ -73,10 +77,19 @@ describe ('Travel Insurance Web', function() {
         cy.get('input[id=datepicker-return-text]').should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
         cy.get('#btnSubmit').click()
-        cy.wait(2500)
     })
 
-    it('Medical Declaration', function() {     
+    it('Medical Declaration', function() {   
+        cy.server()
+        cy.route('POST', '**/travelinsurance/quote/**').as('getPath')
+        cy.visit('/personal-details')
+        cy.wait('@getPath').then((xhr) => {
+            cy.location('pathname', {timeout: 10000}).should('eq', '/travelinsurance/quote/personal-details')
+            cy.get('#medical-declaration-form').as('personalDetaulsForm', {timeout:10000}).should('be.visible')
+        })
+        
+
+        
         cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
         cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.lastname) 
