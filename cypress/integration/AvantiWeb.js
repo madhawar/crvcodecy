@@ -16,7 +16,7 @@ beforeEach(function () {
     })
 })
 
-describe('Travel Insurance Web', function () {    
+describe('Avanti Web', function () {    
 
     it('Get Quote', function () {
         cy.web('qa09', 'avn')
@@ -132,8 +132,8 @@ describe('Sprint 6 Voucher', function () {
     })
 
     it('Zero Voucher Error Message', function() {
-        cf.voucherHeader().should('not.be.visible')
         cy.contains('Voucher Code has been used and no further credit remaining')
+        cf.voucherHeader().should('not.be.visible')        
     })
 
     it('Apply Expired Voucher', function() {       
@@ -143,31 +143,58 @@ describe('Sprint 6 Voucher', function () {
     })
 
     it('Expired Voucher Error Message', function() {
-        cf.voucherHeader().should('not.be.visible')
         cy.contains('Expired Voucher Code')
+        cf.voucherHeader().should('not.be.visible')        
     })
 
     it('Apply Invalid Voucher', function() {       
         //cf.payByVoucher().should('be.visible').click()
         cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_invalid)
-        cf.applyVoucher().should('be.visible').should('be.enabled').click()    
-  
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()      
     })
 
     it('Invalid Voucher Error Message', function() {
-        cf.voucherHeader().should('not.be.visible')
         cy.contains('Incorrect Voucher Code, please try again')
+        cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('Apply Valid Voucher', function() {
+    it('Apply Voucher Less Than Policy Price', function() {
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher)
+        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmall)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()
     })
 
-    it('Valid Voucher Text', function() {
-        cf.voucherHeader().should('not.be.visible')
+    it('Voucher less than policy', function() {
         cy.contains('Your voucher has been added')
+
+        cf.voucherHeader().should('not.be.visible')   
+        cf.cardType().should('be.visible')    
+        cf.purchasePolicy().should('be.visible').contains('Make Payment')
+    })
+
+    it('Close voucher box', function() {
+        cy.get('.close-vc > .fa').click()
+        cy.get('#voucherRemoveProceed').click()
+        cy.wait(4000)
+    })
+
+    it('Apply Voucher More Than Policy Price', function() {
+        cf.payByVoucher().should('be.visible').click()
+        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLarge)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+    })
+
+    it('Voucher more than policy', function() {
+        cy.contains('Your voucher has been added')
+        cy.contains('Remaining voucher credit')
+
+        cf.voucherHeader().should('not.be.visible')
+        cf.cardType().should('not.be.visible')
+        cf.purchasePolicy().should('be.visible').contains('Create Policy')
+    })
+
+    it('Create Policy', function() {
+        cf.purchasePolicy().should('be.visible').contains('Create Policy').click()
     })
 
 })

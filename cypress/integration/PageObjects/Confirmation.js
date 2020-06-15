@@ -1,5 +1,9 @@
 class Confirmation {
 
+    cardType() {
+        return cy.get('#creditCardType')
+    }
+
     payByVoucher() {
         return cy.get('#voucherCodeCollapseIcon')
     }
@@ -14,6 +18,14 @@ class Confirmation {
 
     voucherHeader() {
         return cy.get('#voucher-header-box')
+    }
+
+    purchasePolicy() {
+        return cy.get('#makePayment')
+    }
+
+    createPolicy() {
+
     }
 
 }
