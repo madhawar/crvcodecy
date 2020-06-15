@@ -1,7 +1,6 @@
-/// <reference types="Cypress" />
-
 import TravelDetails from './PageObjects/TravelDetails'
-import VoucherEmail from './VoucherEmail'
+import QuoteResults from './PageObjects/QuoteResults'
+import Confirmation from './PageObjects/Confirmation'
 
 //Cypress.config('baseUrl', 'https://qa09sts.intertrav.co.uk/travelinsurance/quote')
 
@@ -9,9 +8,11 @@ beforeEach(function () {
     cy.fixture('organiser').then(function (organiser) {
         this.organiser = organiser
     })
-
     cy.fixture('quote').then(function (quote) {
         this.quote = quote
+    })
+    cy.fixture('vouchers').then(function (vouchers) {
+        this.vouchers = vouchers
     })
 })
 
@@ -54,7 +55,7 @@ describe('Travel Insurance Web', function () {
 
     it('Medical Declaration', function () {
         cy.location('pathname').should('eq', '/travelinsurance/quote/personal-details')
-     
+   
         cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
         cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
@@ -70,7 +71,9 @@ describe('Travel Insurance Web', function () {
     it('Quote Results', function () {
         cy.location('pathname').should('eq', '/travelinsurance/quote/results')
 
-        cy.get('#ANNUAL_MULTI_TRIP_COMPREHENSIVE_BTN').should('be.visible').should('be.enabled').click()
+        const qr = new QuoteResults()
+
+        qr.amtC().should('be.visible').should('be.enabled').click()
 
         cy.get('#OEContinueBtn').should('be.visible').should('be.enabled').click()
 
@@ -92,14 +95,14 @@ describe('Travel Insurance Web', function () {
 
         cy.get('#user-declaration').click('left')
         cy.get('#user-accept').click('left')
-
-        cy.get('#makePayment').should('be.visible').should('be.enabled').click()
     })
 
-    it('Payment Details', function () {
+    /*it('Payment Details', function () {
         cy.fixture('cards').then(function (cards) {
             this.cards = cards
         })
+
+        cy.get('#makePayment').should('be.visible').should('be.enabled').click()
 
         cy.location('hostname').should('eq', 'barclaycardsmartpay')
 
@@ -114,5 +117,57 @@ describe('Travel Insurance Web', function () {
         cy.get('#card\.cvcCode').type(this.cards.cvv)
         
         cy.get('input[type=submit]').click()
+    })*/    
+
+})
+
+describe('Sprint 6 Voucher', function () {  
+
+    const cf = new Confirmation()
+
+    it('Apply Zero Voucher', function() {       
+        cf.payByVoucher().should('be.visible').click()
+        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_zero)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()
     })
+
+    it('Zero Voucher Error Message', function() {
+        cf.voucherHeader().should('not.be.visible')
+        cy.contains('Voucher Code has been used and no further credit remaining')
+    })
+
+    it('Apply Expired Voucher', function() {       
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_expired)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+    })
+
+    it('Expired Voucher Error Message', function() {
+        cf.voucherHeader().should('not.be.visible')
+        cy.contains('Expired Voucher Code')
+    })
+
+    it('Apply Invalid Voucher', function() {       
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_invalid)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()    
+  
+    })
+
+    it('Invalid Voucher Error Message', function() {
+        cf.voucherHeader().should('not.be.visible')
+        cy.contains('Incorrect Voucher Code, please try again')
+    })
+
+    it('Apply Valid Voucher', function() {
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+    })
+
+    it('Valid Voucher Text', function() {
+        cf.voucherHeader().should('not.be.visible')
+        cy.contains('Your voucher has been added')
+    })
+
 })
