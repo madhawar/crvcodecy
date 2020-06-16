@@ -1,5 +1,22 @@
 class Confirmation {
 
+    addressLine1() {
+        return cy.get('#firstLineOfAddress')
+    }
+    addressCity() {
+        return cy.get('#city')
+    }
+
+    dobYYYY() {
+        return cy.get('#year')
+    }
+    dobMM() {
+        return cy.get('#month')
+    }
+    dobDD() {
+        return cy.get('#day')
+    }
+
     cardType() {
         return cy.get('#creditCardType')
     }
@@ -26,6 +43,13 @@ class Confirmation {
 
     closeVoucherConf() {
         return cy.get('#voucherRemoveProceed')
+    }
+
+    userDeclaration() {
+        return cy.get('#user-declaration')
+    }
+    userAccept() {
+        return cy.get('#user-accept')
     }
 
     purchasePolicy() {

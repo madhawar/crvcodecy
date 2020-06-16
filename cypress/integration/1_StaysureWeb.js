@@ -1,6 +1,8 @@
 import TravelDetails from './PageObjects/TravelDetails'
+import MedicalDeclaration from './PageObjects/MedicalDeclaration'
 import QuoteResults from './PageObjects/QuoteResults'
 import Confirmation from './PageObjects/Confirmation'
+import Payment from './PageObjects/Payment'
 
 //Cypress.config('baseUrl', 'https://qa09sts.intertrav.co.uk/travelinsurance/quote')
 
@@ -55,16 +57,18 @@ describe('Staysure Web', function () {
 
     it('Medical Declaration', function () {
         cy.location('pathname').should('eq', '/travelinsurance/quote/personal-details')
+
+        const md = new MedicalDeclaration()
    
-        cy.get('#traveler_title_0').should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
-        cy.get('#traveler_first_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
-        cy.get('#traveler_last_name_0').should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
+        md.traveller1Title().should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
+        md.traveller1Name().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
+        md.traveller1Surname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
 
-        cy.get('#checkbox-accept-label').click()
-        cy.get(':nth-child(2) > label').click()
+        md.medicalAccept().click()
+        md.medicalAcceptConf().click()
 
-        cy.get(':nth-child(6) > .btn').click()
-        cy.get('#medical_dec_submit_btn').should('be.visible').should('be.enabled').click()
+        md.traveller1MedicalNo().click()
+        md.submitMedical().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
     })
 
@@ -73,51 +77,50 @@ describe('Staysure Web', function () {
 
         const qr = new QuoteResults()
 
-        qr.amtC().should('be.visible').should('be.enabled').click()
+        qr.amtComprehensive().should('be.visible').should('be.enabled').click()
 
-        cy.get('#OEContinueBtn').should('be.visible').should('be.enabled').click()
+        qr.continueOE().should('be.visible').should('be.enabled').click()
 
-        cy.get('#cancellationCoverChangeSubmit').should('be.visible').should('be.enabled').click()
+        qr.cancellationCoverButton().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
     })
 
     it('Confirmation', function () {
         cy.location('pathname').should('eq', '/travelinsurance/quote/payment-details')
 
-        cy.get('#firstLineOfAddress').should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
-        cy.get('#city').should('be.visible').should('be.enabled').clear().type(this.organiser.city)
+        const cf = new Confirmation()
 
-        cy.get('#year').select(this.organiser.year)
-        cy.get('#month').select(this.organiser.month)
-        cy.get('#day').select(this.organiser.day)
+        cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
+        cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
 
-        cy.get('#creditCardType').select('1').should('have.value', '1')
+        cf.dobYYYY().select(this.organiser.year)
+        cf.dobMM().select(this.organiser.month)
+        cf.dobDD().select(this.organiser.day)
 
-        cy.get('#user-declaration').click('left')
-        cy.get('#user-accept').click('left')
+        cf.cardType().select('1').should('have.value', '1')
+
+        cf.userDeclaration().click('left')
+        cf.userAccept().click('left')        
     })
 
-    /*it('Payment Details', function () {
-        cy.fixture('cards').then(function (cards) {
-            this.cards = cards
-        })
-
-        cy.get('#makePayment').should('be.visible').should('be.enabled').click()
-
-        cy.location('hostname').should('eq', 'barclaycardsmartpay')
-
-        cy.get('iframe').click //#Your\ App\:\ \'crvcode\'
-
+    /*
+    it ('Purchase Policy', function() {
+        cf.purchasePolicy().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
+    })
 
-        cy.get('#card\.cardNumber').clear().type(this.cards.card)
-        cy.get('#card\.cardHolderName').clear().type(this.cards.name)
-        cy.get('#card\.expiryMonth').select(this.cards.mm)
-        cy.get('#card\.expiryYear').select(this.cards.yy)
-        cy.get('#card\.cvcCode').type(this.cards.cvv)
+    it('Barclayscard Smartpay', function () {
+        const pm = new Payment()
+
+        pm.cardNumber().clear().type('4111111111111111')
+        pm.cardHolderName().clear().type('KAPILA UNDUKAPUCHCHA')
+        pm.expiryMonth().select('10')
+        pm.expiryYear().select('2020')
+        pm.cvcCode().clear().type('737')
         
-        cy.get('input[type=submit]').click()
-    })*/    
+        pm.submit().click()
+    })
+    */    
 
 })
 
@@ -198,5 +201,4 @@ describe('Sprint 6 Voucher', function () {
         cy.wait(4000)
         cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
     })
-
 })
