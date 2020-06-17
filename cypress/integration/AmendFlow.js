@@ -13,15 +13,24 @@ describe('Intertrav HUB Login', function() {
         cy.get('#viewPolicyBtn').click()
         cy.get('#amendPolicybtn > div').click()
         cy.get('#amendPolicy').click()
+
+        cy.wait(4000)
     })
 
     it('Claims Question', function() {
-        //cy.get('#claimsMadeMTA').click()
-        
-        cy.get('div', '#claimQuestionOnMTA').within(($form) => {
-            cy.contains('Have there been any claims made, any claims pending or are there any intentions to claim on this policy?')
-            cy.get('input').eq(2).click()
+        cy.get('iframe').iframe(() => {
+            cy.get('#claimsMadeMTA').click()
+            cy.get('#claimQuestMTAContinueBtn').click()
+        })
+        cy.wait(4000)
+    })
+
+    it('Organiser Details', function() {        
+        cy.get('iframe').iframe(() => {
+            cy.get('#amendmentsWithTravellers').click()
         })
     })
+
+    
 
 })
