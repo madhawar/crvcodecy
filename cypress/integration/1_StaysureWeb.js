@@ -46,7 +46,7 @@ describe('Staysure Web', function () {
         td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
         td.destination0().clear().type(this.quote.country_1)
-        td.destination0().type('{downarrow}{enter}')
+        td.searchCountry0().contains(this.quote.country_1).click();
         td.multipleNo().click()
 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)

@@ -31,6 +31,10 @@ class TravelDetails {
         return cy.get('#countrySearchInput')
     }
 
+    searchCountry0() {
+        return cy.get('*[id="countrySearchResult"]')
+    }
+
     multipleYes() {
 
     }
