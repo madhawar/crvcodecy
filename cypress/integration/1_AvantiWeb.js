@@ -21,7 +21,7 @@ beforeEach(function () {
 describe('Avanti Web', function () {    
 
     it('Get Quote', function () {
-        cy.web('uat02', 'avn')
+        cy.web('qa09', 'avn')
         cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
     })
 

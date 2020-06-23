@@ -21,7 +21,7 @@ beforeEach(function () {
 describe('Staysure Web', function () {    
 
     it('Get Quote', function () {
-        cy.web('uat02', 'sts')
+        cy.web('qa09', 'sts')
         cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
     })
 
