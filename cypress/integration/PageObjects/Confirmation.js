@@ -25,8 +25,12 @@ class Confirmation {
         return cy.get('#voucherCodeCollapseIcon')
     }
 
-    enterVoucher() {
-        return cy.get('#voucherCode')
+    enterFirstVoucher() {
+        return cy.get('#voucherCode1')
+    }
+
+    enterSecondVoucher() {
+        return cy.get('#voucherCode2')
     }
 
     applyVoucher() {

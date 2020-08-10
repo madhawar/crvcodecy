@@ -124,82 +124,109 @@ describe('Avanti Web', function () {
 
 })
 
-describe('Sprint 6 Voucher', function () {  
+describe('Sprint 6 Voucher 1', function () {  
 
     const cf = new Confirmation()
-
-    it('Apply Zero Voucher', function() {       
+    
+    it('VB1 Apply Zero Voucher', function() {       
         cf.payByVoucher().should('be.visible').click()
-        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_zero)
+        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_zero)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()
     })
 
-    it('Zero Voucher Error Message', function() {
-        cy.contains('Voucher Code has been used and no further credit remaining')
+    it('VB1 Zero Voucher Error Message', function() {
+        cy.contains('Zero Remaining Amount Voucher')
         cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('Apply Expired Voucher', function() {       
+    it('VB1 Apply Expired Voucher', function() {       
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_expired)
+        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_expired)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()
     })
 
-    it('Expired Voucher Error Message', function() {
-        cy.contains('Expired Voucher Code')
+    it('VB1 Expired Voucher Error Message', function() {
+        cy.contains('Expired Voucher')
         cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('Apply Invalid Voucher', function() {       
+    it('VB1 Apply Invalid Voucher', function() {       
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_invalid)
+        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_invalid)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()      
     })
 
-    it('Invalid Voucher Error Message', function() {
-        cy.contains('Incorrect Voucher Code, please try again')
+    it('VB1 Invalid Voucher Error Message', function() {
+        cy.contains('Invalid Voucher')
         cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('Apply Voucher Less Than Policy Price', function() {
+    it('VB1 Apply Voucher 1', function() {
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmall)
+        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmall)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()
     })
 
-    it('Voucher less than policy', function() {
-        cy.contains('Your voucher has been added')
+})
 
-        cf.voucherHeader().should('not.be.visible')   
-        cf.cardType().should('be.visible')    
-        cf.purchasePolicy().should('be.visible').contains('Make Payment')
-    })
+describe('Sprint 6 Voucher 2', function () {  
 
-    it('Close voucher box', function() {
-        cf.closeVoucher().click()
-        cf.closeVoucherConf().click()
-        cy.wait(4000)
-    })
-
-    it('Apply Voucher More Than Policy Price', function() {
-        cf.payByVoucher().should('be.visible').click()
-        cf.enterVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher)
+    const cf = new Confirmation()
+    
+    it('VB2 Apply Zero Voucher', function() {       
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_zero)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()
     })
 
-    it('Voucher more than policy', function() {
-        cy.contains('Your voucher has been added')
-        cy.contains('Remaining voucher credit')
-
-        cf.voucherHeader().should('not.be.visible')
-        cf.cardType().should('not.be.visible')
-        cf.purchasePolicy().should('be.visible').contains('Create Policy')
+    it('VB2 Zero Voucher Error Message', function() {
+        cy.contains('Zero Remaining Amount Voucher')
+        cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('Create Policy', function() {
+    it('VB2 Apply Expired Voucher', function() {       
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_expired)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+    })
+
+    it('VB2 Expired Voucher Error Message', function() {
+        cy.contains('Expired Voucher')
+        cf.voucherHeader().should('not.be.visible')        
+    })
+
+    it('VB2 Apply Invalid Voucher', function() {       
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucher_invalid)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()      
+    })
+
+    it('VB2 Invalid Voucher Error Message', function() {
+        cy.contains('Invalid Voucher')
+        cf.voucherHeader().should('not.be.visible')        
+    })
+
+    it('VB2 Apply Voucher 2', function() {
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLarge)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+    })
+
+    it('Both vouchers have been added label', function() {
+        cy.contains('Both vouchers have been added')
+        cf.voucherHeader().should('not.be.visible')        
+    })
+
+    it('Both Vouchers On Display', function() {
+        cy.contains(this.vouchers.voucherSmall + ' & ' + this.vouchers.voucherLarge)
+        cf.voucherHeader().should('not.be.visible')        
+    })
+
+
+    /*it('Create Policy', function() {
         cf.purchasePolicy().should('be.visible').contains('Create Policy').click()
         cy.wait(4000)
         cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
-    })
+    })*/
 
 })
