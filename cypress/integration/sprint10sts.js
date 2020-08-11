@@ -211,6 +211,17 @@ describe('Sprint 6 Voucher 2', function () {
         cf.voucherHeader().should('not.be.visible')        
     })
 
+    it('VB2 Apply Already Entered Voucher', function() {       
+        //cf.payByVoucher().should('be.visible').click()
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallSTS)
+        cf.applyVoucher().should('be.visible').should('be.enabled').click()      
+    })
+
+    it('VB2 Identical Voucher Error Message', function() {
+        cy.contains('Both the vouchers are identical')
+        cf.voucherHeader().should('not.be.visible')        
+    })
+
     it('VB2 Apply Voucher 2', function() {
         //cf.payByVoucher().should('be.visible').click()
         cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeSTS)
