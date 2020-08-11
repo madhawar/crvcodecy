@@ -59,6 +59,10 @@ class Confirmation {
     purchasePolicy() {
         return cy.get('#makePayment')
     }
+    
+    passportEXP() {
+        return cy.get('#passPort')
+    }
 
 }
 

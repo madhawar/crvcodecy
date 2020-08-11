@@ -27,6 +27,10 @@ class TravelDetails {
 
     }
 
+    fromEXP() {
+        return cy.get('#expatFromLocation')
+    }
+
     destination0() {
         return cy.get('#countrySearchInput')
     }

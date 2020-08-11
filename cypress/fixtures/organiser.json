@@ -12,5 +12,9 @@
     "month": "4",
     "day": "27",
     "address_1": "345 Cave Stone Road",
-    "city": "Bedrock"
+    "city": "Bedrock",
+
+    "dayTimeTelephoneEXP": "07712570250",
+    "postcodeEXP": "70000",
+    "passportEXP": "42069"
 }
