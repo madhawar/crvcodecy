@@ -46,7 +46,7 @@ describe('Staysure Web', function () {
         td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
         td.destination0().clear().type(this.quote.country_1)
-        td.searchCountry0().contains(this.quote.country_1).click();
+        td.searchCountry0().contains(this.quote.country_1).click()
         td.multipleNo().click()
 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
@@ -164,7 +164,8 @@ describe('Sprint 6 Voucher 1', function () {
     it('VB1 Apply Voucher 1', function() {
         //cf.payByVoucher().should('be.visible').click()
         cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallSTS)
-        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+        //cf.applyVoucher().should('be.visible').should('be.enabled').click()
+        cf.enterFirstVoucher().type('{enter}')
     })
 
     it('VB1 Voucher Successfully Added', function() {
@@ -225,7 +226,8 @@ describe('Sprint 6 Voucher 2', function () {
     it('VB2 Apply Voucher 2', function() {
         //cf.payByVoucher().should('be.visible').click()
         cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeSTS)
-        cf.applyVoucher().should('be.visible').should('be.enabled').click()
+        //cf.applyVoucher().should('be.visible').should('be.enabled').click()
+        cf.enterSecondVoucher().type('{enter}')
     })
 
     it('Both vouchers have been added label', function() {
