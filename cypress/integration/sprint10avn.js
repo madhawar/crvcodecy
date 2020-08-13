@@ -240,6 +240,10 @@ describe('Sprint 6 Voucher 2', function () {
         cf.voucherHeader().should('not.be.visible')        
     })
 
+    it('Apply button should be hidden', function() {
+        cf.applyVoucher().should('not.be.visible')
+    })
+
 
     /*it('Create Policy', function() {
         cf.purchasePolicy().should('be.visible').contains('Create Policy').click()

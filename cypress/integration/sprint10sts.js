@@ -237,7 +237,12 @@ describe('Sprint 6 Voucher 2', function () {
 
     it('Both Vouchers On Display', function() {
         cy.contains(this.vouchers.voucherSmallSTS + ' & ' + this.vouchers.voucherLargeSTS)
-        cf.voucherHeader().should('not.be.visible')        
+        cf.voucherHeader().should('not.be.visible')    
+        cf.applyVoucher().should('not.be.visible')
+    })
+
+    it('Apply button should be hidden', function() {
+        cf.applyVoucher().should('not.be.visible')
     })
 
 
