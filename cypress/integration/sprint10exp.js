@@ -165,17 +165,16 @@ describe('Sprint 6 Voucher 1', function () {
         cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('VB1 Apply Voucher 1', function() {
+    it('VB1 Apply Voucher 1 With Enter Key', function() {
         //cf.payByVoucher().should('be.visible').click()
         cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallEXP)
-        //cf.applyVoucher().should('be.visible').should('be.enabled').click()
         cf.enterFirstVoucher().type('{enter}')
-    })
+    })  
 
     it('VB1 Voucher Successfully Added', function() {
         cy.contains('Your voucher has been added')
         cf.voucherHeader().should('not.be.visible')        
-    })
+    })    
 
 })
 
@@ -227,7 +226,7 @@ describe('Sprint 6 Voucher 2', function () {
         cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('VB2 Apply Voucher 2', function() {
+    it('VB2 Apply Voucher 2 With Enter Key', function() {
         //cf.payByVoucher().should('be.visible').click()
         cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeEXP)
         //cf.applyVoucher().should('be.visible').should('be.enabled').click()
@@ -248,6 +247,10 @@ describe('Sprint 6 Voucher 2', function () {
         cf.applyVoucher().should('not.be.visible')
     })
 
+    it('VB2 Close Voucher Box 2', function() {
+        cf.closeVoucher().should('be.visible').click()
+        cf.closeVoucherConf().should('be.visible').click()
+    })
 
     /*it('Create Policy', function() {
         cf.purchasePolicy().should('be.visible').contains('Create Policy').click()

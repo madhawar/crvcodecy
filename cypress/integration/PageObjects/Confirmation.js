@@ -49,6 +49,10 @@ class Confirmation {
         return cy.get('#voucherRemoveProceed')
     }
 
+    closeVoucherConfCancel() {
+        return cy.get('#voucherCodeCollapseIcon')
+    }
+
     userDeclaration() {
         return cy.get('#user-declaration')
     }
