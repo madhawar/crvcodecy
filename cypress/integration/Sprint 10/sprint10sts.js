@@ -1,10 +1,10 @@
-import TravelDetails from './PageObjects/TravelDetails'
-import MedicalDeclaration from './PageObjects/MedicalDeclaration'
-import QuoteResults from './PageObjects/QuoteResults'
-import Confirmation from './PageObjects/Confirmation'
-import Payment from './PageObjects/Payment'
+import TravelDetails from '../PageObjects/TravelDetails'
+import MedicalDeclaration from '../PageObjects/MedicalDeclaration'
+import QuoteResults from '../PageObjects/QuoteResults'
+import Confirmation from '../PageObjects/Confirmation'
+import Payment from '../PageObjects/Payment'
 
-//Cypress.config('baseUrl', 'https://qa09avn.intertrav.co.uk/travelinsurance/quote')
+//Cypress.config('baseUrl', 'https://qa09sts.intertrav.co.uk/travelinsurance/quote')
 
 beforeEach(function () {
     cy.fixture('organiser').then(function (organiser) {
@@ -18,10 +18,10 @@ beforeEach(function () {
     })
 })
 
-describe('Avanti Web', function () {    
+describe('Staysure Web', function () {    
 
     it('Get Quote', function () {
-        cy.web('qa09', 'avn')
+        cy.web('qa09', 'sts')
         cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
     })
 
@@ -77,7 +77,7 @@ describe('Avanti Web', function () {
 
         const qr = new QuoteResults()
 
-        qr.amtDeluxe().should('be.visible').should('be.enabled').click()
+        qr.amtComprehensive().should('be.visible').should('be.enabled').click()
 
         qr.continueOE().should('be.visible').should('be.enabled').click()
 
@@ -100,7 +100,7 @@ describe('Avanti Web', function () {
         cf.cardType().select('1').should('have.value', '1')
 
         cf.userDeclaration().click('left')
-        cf.userAccept().click('left')
+        cf.userAccept().click('left')        
     })
 
     /*
@@ -120,7 +120,7 @@ describe('Avanti Web', function () {
         
         pm.submit().click()
     })
-    */
+    */    
 
 })
 
@@ -163,7 +163,7 @@ describe('Sprint 6 Voucher 1', function () {
 
     it('VB1 Apply Voucher 1 With Enter Key', function() {
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallAVN)
+        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallSTS)
         cf.enterFirstVoucher().type('{enter}')
     })
 
@@ -213,7 +213,7 @@ describe('Sprint 6 Voucher 2', function () {
 
     it('VB2 Apply Already Entered Voucher', function() {       
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallAVN)
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallSTS)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()      
     })
 
@@ -224,7 +224,7 @@ describe('Sprint 6 Voucher 2', function () {
 
     it('VB2 Apply Voucher 2', function() {
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeAVN)
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeSTS)
         //cf.applyVoucher().should('be.visible').should('be.enabled').click()
         cf.enterSecondVoucher().type('{enter}')
     })
@@ -235,8 +235,8 @@ describe('Sprint 6 Voucher 2', function () {
     })
 
     it('Both Vouchers On Display', function() {
-        cy.contains(this.vouchers.voucherSmallAVN + ' & ' + this.vouchers.voucherLargeAVN)
-        cf.voucherHeader().should('not.be.visible')        
+        cy.contains(this.vouchers.voucherSmallSTS + ' & ' + this.vouchers.voucherLargeSTS)
+        cf.voucherHeader().should('not.be.visible')    
     })
 
     it('Apply button should be hidden', function() {

@@ -1,8 +1,8 @@
-import TravelDetails from './PageObjects/TravelDetails'
-import MedicalDeclaration from './PageObjects/MedicalDeclaration'
-import QuoteResults from './PageObjects/QuoteResults'
-import Confirmation from './PageObjects/Confirmation'
-import Payment from './PageObjects/Payment'
+import TravelDetails from '../PageObjects/TravelDetails'
+import MedicalDeclaration from '../PageObjects/MedicalDeclaration'
+import QuoteResults from '../PageObjects/QuoteResults'
+import Confirmation from '../PageObjects/Confirmation'
+import Payment from '../PageObjects/Payment'
 
 //Cypress.config('baseUrl', 'https://qa09sts.intertrav.co.uk/travelinsurance/quote')
 
@@ -18,10 +18,10 @@ beforeEach(function () {
     })
 })
 
-describe('Staysure Web', function () {    
+describe('Expat Web', function () {    
 
     it('Get Quote', function () {
-        cy.web('qa09', 'sts')
+        cy.web('qa09', 'exp')
         cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
     })
 
@@ -40,14 +40,16 @@ describe('Staysure Web', function () {
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
         td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.email)
-        td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
-        td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
+        td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephoneEXP)
+        td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcodeEXP)
 
         td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
-
-        td.destination0().clear().type(this.quote.country_1)
-        td.searchCountry0().contains(this.quote.country_1).click()
+       
+        td.destination0().clear().type(this.quote.country_2)
+        td.searchCountry0().contains(this.quote.country_2).click()
         td.multipleNo().click()
+
+        td.fromEXP().should('be.visible').should('be.enabled').select(this.quote.from_country_exp)
 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
@@ -92,6 +94,8 @@ describe('Staysure Web', function () {
 
         cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
         cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
+
+        cf.passportEXP().should('be.visible').should('be.enabled').clear().type(this.organiser.passportEXP)
 
         cf.dobYYYY().select(this.organiser.year)
         cf.dobMM().select(this.organiser.month)
@@ -163,14 +167,14 @@ describe('Sprint 6 Voucher 1', function () {
 
     it('VB1 Apply Voucher 1 With Enter Key', function() {
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallSTS)
+        cf.enterFirstVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallEXP)
         cf.enterFirstVoucher().type('{enter}')
-    })
+    })  
 
     it('VB1 Voucher Successfully Added', function() {
         cy.contains('Your voucher has been added')
         cf.voucherHeader().should('not.be.visible')        
-    })
+    })    
 
 })
 
@@ -213,7 +217,7 @@ describe('Sprint 6 Voucher 2', function () {
 
     it('VB2 Apply Already Entered Voucher', function() {       
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallSTS)
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherSmallEXP)
         cf.applyVoucher().should('be.visible').should('be.enabled').click()      
     })
 
@@ -222,9 +226,9 @@ describe('Sprint 6 Voucher 2', function () {
         cf.voucherHeader().should('not.be.visible')        
     })
 
-    it('VB2 Apply Voucher 2', function() {
+    it('VB2 Apply Voucher 2 With Enter Key', function() {
         //cf.payByVoucher().should('be.visible').click()
-        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeSTS)
+        cf.enterSecondVoucher().should('be.visible').should('be.enabled').clear().type(this.vouchers.voucherLargeEXP)
         //cf.applyVoucher().should('be.visible').should('be.enabled').click()
         cf.enterSecondVoucher().type('{enter}')
     })
@@ -235,8 +239,8 @@ describe('Sprint 6 Voucher 2', function () {
     })
 
     it('Both Vouchers On Display', function() {
-        cy.contains(this.vouchers.voucherSmallSTS + ' & ' + this.vouchers.voucherLargeSTS)
-        cf.voucherHeader().should('not.be.visible')    
+        cy.contains(this.vouchers.voucherSmallEXP + ' & ' + this.vouchers.voucherLargeEXP)
+        cf.voucherHeader().should('not.be.visible')        
     })
 
     it('Apply button should be hidden', function() {
