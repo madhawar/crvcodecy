@@ -39,11 +39,47 @@ class TravelDetails {
         return cy.get('*[id="countrySearchResult"]')
     }
 
-    multipleYes() {
+    destination1() {
+        return cy.get('#countrySearchInput1')
+    }
 
+    searchCountry1() {
+        return cy.get('*[id="countrySearchResult1"]')
+    }
+
+    destination2() {
+        return cy.get('#countrySearchInput2')
+    }
+
+    searchCountry2() {
+        return cy.get('*[id="countrySearchResult2"]')
+    }
+
+    destination3() {
+        return cy.get('#countrySearchInput3')
+    }
+
+    searchCountry3() {
+        return cy.get('*[id="countrySearchResult3"]')
+    }
+
+    destination4() {
+        return cy.get('#countrySearchInput4')
+    }
+
+    searchCountry4() {
+        return cy.get('*[id="countrySearchResult4"]')
+    }
+
+    multipleYes() {
+        return cy.get('#multiple-destination-yes-btn')
     }
     multipleNo() {
-        return cy.get('#multiple-destination > .question-container > :nth-child(3)')
+        return cy.get('#multiple-destination-no-btn')
+    }
+
+    addMultipleDestination() {
+        return cy.get('#add-destination')
     }
 
     departDate() {

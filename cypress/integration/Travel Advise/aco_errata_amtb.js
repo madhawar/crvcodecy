@@ -16,6 +16,9 @@ beforeEach(function () {
     cy.fixture('vouchers').then(function (vouchers) {
         this.vouchers = vouchers
     })
+    cy.fixture('popups').then(function (popups) {
+        this.popups = popups
+    })
 })
 
 describe('Staysure Web', function () {    
@@ -45,9 +48,22 @@ describe('Staysure Web', function () {
 
         td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
-        td.destination0().clear().type(this.quote.country_1)
-        td.searchCountry0().contains(this.quote.country_1).click()
-        td.multipleNo().click()
+        td.destination0().clear().type(this.quote.tda_country_1)
+        td.searchCountry0().contains(this.quote.tda_country_1).click()
+
+        td.multipleYes().click()
+
+        cy.get('#add-destination').click()
+        td.destination1().clear().type(this.quote.tda_country_2)
+        td.searchCountry1().contains(this.quote.tda_country_2).click()
+
+        cy.get('#add-destination').click()
+        td.destination2().clear().type(this.quote.tda_country_3)
+        td.searchCountry2().contains(this.quote.tda_country_3).click()
+
+        cy.get('#add-destination').click()
+        td.destination3().clear().type(this.quote.tda_country_4)
+        td.searchCountry3().contains(this.quote.tda_country_4).click()
 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
@@ -81,27 +97,26 @@ describe('Staysure Web', function () {
     })
 
     it('Travel Advisory Extension Visibility', function() {
-        cy.contains('Travel Advice Extension Cover')
+        cy.contains(this.popups.Travel_Advice_Extension_Label)
     })
 
     it('Travel Advisory Extension More Information Popup Open', function() {
-        cy.get(':nth-child(2) > :nth-child(2) > .covertype > .tooltip-icon > .AocMore').click()
-        
+        const qr = new QuoteResults()
+        qr.travelAdviseExtensionPopupOpenBasic().click()       
     })
 
     it('Travel Advisory Extension More Information Popup Content', function() {
-        cy.contains('Travel Advice Extension Cover')
-        
+        cy.contains(this.popups.Travel_Advice_Extension)
     })
 
     it('Travel Advisory Extension More Information Popup Exit', function() {
-        cy.get('.sub-close').click()
-        
+        const qr = new QuoteResults()
+        qr.travelAdviseExtensionPopupClose().click()          
     })    
 
     it('Select Travel Advisory Extension', function() {
         const qr = new QuoteResults()
-        cy.contains('Travel Advice Extension Cover')
+        cy.contains(this.popups.Travel_Advice_Extension_Label)
         qr.travelAdviseExtension().should('be.visible').click()
     })
 

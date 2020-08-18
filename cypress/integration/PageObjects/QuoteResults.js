@@ -30,8 +30,19 @@ class QuoteResults {
 
     travelAdviseExtension() {
         return cy.get('#OEWEB_FCO_ADVICE > label')
-        //return cy.get('//*[@id="optionalExtras[8].selected"]')
+    }          
+
+    travelAdviseExtensionPopupOpen() {
+        return cy.get(':nth-child(5) > :nth-child(2) > .covertype > .tooltip-icon > .AocMore')        
     }
+
+    travelAdviseExtensionPopupOpenBasic() {
+        return cy.get(':nth-child(2) > :nth-child(2) > .covertype > .tooltip-icon > .AocMore')    
+    }    
+
+    travelAdviseExtensionPopupClose() {
+        return cy.get('.sub-close')
+    }    
 }
 
 export default QuoteResults
