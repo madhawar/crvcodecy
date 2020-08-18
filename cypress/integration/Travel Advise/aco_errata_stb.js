@@ -19,12 +19,15 @@ beforeEach(function () {
     cy.fixture('popups').then(function (popups) {
         this.popups = popups
     })
+    cy.fixture('meta').then(function (meta) {
+        this.meta = meta
+    })
 })
 
 describe('Staysure Web', function () {    
 
     it('Get Quote', function () {
-        cy.web('uat05', 'sts')
+        cy.web(this.meta.server, this.meta.domain)
         cy.location('pathname').should('eq', '/travelinsurance/quote/policy-details')
     })
 
@@ -154,11 +157,11 @@ describe('Staysure Web', function () {
     it('Barclayscard Smartpay', function () {
         const pm = new Payment()
 
-        pm.cardNumber().clear().type('4111111111111111')
-        pm.cardHolderName().clear().type('KAPILA UNDUKAPUCHCHA')
-        pm.expiryMonth().select('10')
-        pm.expiryYear().select('2020')
-        pm.cvcCode().clear().type('737')
+        pm.cardNumber().clear().type(this.meta.cc)
+        pm.cardHolderName().clear().type(this.meta.name)
+        pm.expiryMonth().select(this.meta.mm)
+        pm.expiryYear().select(this.meta.yyyy)
+        pm.cvcCode().clear().type(this.meta.cvv)
         
         pm.submit().click()
     })
