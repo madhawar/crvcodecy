@@ -1,6 +1,6 @@
 {
-    "server": "prelive",
-    "domain" : "sts",
+    "server": "uat05",
+    "domain" : "avn",
     "cc": "4111111111111111",
     "cvv": "737",
     "mm": "10",

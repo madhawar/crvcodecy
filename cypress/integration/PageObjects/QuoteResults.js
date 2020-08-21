@@ -16,6 +16,26 @@ class QuoteResults {
         return cy.get('#ANNUAL_MULTI_TRIP_COMPREHENSIVE_BTN')
     }
 
+    stEssential() {
+        return cy.get('#SINGLE_TRIP_ESSENTIALS_BTN')
+    }
+
+    stClassic() {
+        return cy.get('#SINGLE_TRIP_CLASSIC_BTN')
+    }
+
+    stDeluxe() {
+        return cy.get('#SINGLE_TRIP_DELUXE_BTN')
+    }
+
+    amtEssential() {
+        return cy.get('#ANNUAL_MULTI_TRIP_ESSENTIALS_BTN')
+    }
+
+    amtClassic() {
+        return cy.get('#ANNUAL_MULTI_TRIP_CLASSIC_BTN')
+    }
+
     amtDeluxe() {
         return cy.get('#ANNUAL_MULTI_TRIP_DELUXE_BTN')
     }
