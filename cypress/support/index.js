@@ -23,7 +23,7 @@ Cypress.Screenshot.defaults({
 })
 
 Cypress.Cookies.defaults({
-  whitelist: 'JSESSIONID'
+  preserve: 'JSESSIONID'
 })
 
 Cypress.on('uncaught:exception', (err, runnable) => {
