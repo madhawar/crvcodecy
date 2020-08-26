@@ -15,8 +15,22 @@ Cypress.Commands.add("staysure", (username, password, server) => {
     cy.get('input[name=submit]').click()
 })
 
+Cypress.Commands.add("mystaysure", (username, password, server) => {
+    cy.visit('https://' + server + 'sts.intertrav.co.uk/mystaysure/signin')
+    cy.get('input[name=username]').type(username)
+    cy.get('input[name=password]').type(password)
+    cy.get('input[name=submit]').click()
+})
+
 Cypress.Commands.add("avanti", (username, password, server) => {
     cy.visit('https://' + server + 'avn.intertrav.co.uk/avanti/login')
+    cy.get('input[name=username]').type(username)
+    cy.get('input[name=password]').type(password)
+    cy.get('input[name=submit]').click()
+})
+
+Cypress.Commands.add("myavanti", (username, password, server) => {
+    cy.visit('https://' + server + 'avn.intertrav.co.uk/myavanti/signin')
     cy.get('input[name=username]').type(username)
     cy.get('input[name=password]').type(password)
     cy.get('input[name=submit]').click()

@@ -130,7 +130,54 @@ class TravelDetails {
     }
     orgPostcode() {
         return cy.get('input[id=postcode]')
+    }
 
+    ossi_email() {
+        return cy.get('#my-account-username')
+    }
+
+    ossi_password() {
+        return cy.get('#my-account-password')
+    }
+
+    ossi_forgot_password() {
+        return cy.get('#my-account-forgot-password')
+    }
+
+    ossi_forgot_password_email() {
+        return cy.get('#username')
+    }
+
+    ossi_btn_reset_password() {
+        return cy.get('#forgotten-password-popup > .popup-content > .popup-footer > .btn-submit')
+    }
+
+    ossi_btn_exit_forgot_password() {
+        return cy.get('.popup-content > .popup-footer > .btn-submit-outline')
+    }
+
+    ossi_btn_login() {
+        return cy.get('#my-account-login-btn')
+    }
+
+    ossi_btn_login_success() {
+        return cy.get('#thank-you-for-logging-popup-continue-btn')
+    }
+
+    ossi_popup_email() {
+        return cy.get('#my-account-email')
+    }
+
+    ossi_popup_password() {
+        return cy.get('#my-account-password-pop-up')
+    }
+
+    ossi_popup_btn_login() {
+        return cy.get('#my-account-login-btn2')
+    }
+
+    ossi_popup_btn_continue() {
+        return cy.get('#my-account-continue2')
     }
         
 }

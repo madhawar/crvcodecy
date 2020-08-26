@@ -1,9 +1,11 @@
 {
-    "server": "uat05",
+    "server": "qa09",
     "domain" : "avn",
     "cc": "4111111111111111",
     "cvv": "737",
     "mm": "10",
     "yyyy": "2020",
-    "name": "KAPILA UNDUKAPUCHCHA"
+    "name": "KAPILA UNDUKAPUCHCHA",
+    "selfserv_email": "madhawa@intervest.lk",
+    "selfserv_password": "January*27"
 }

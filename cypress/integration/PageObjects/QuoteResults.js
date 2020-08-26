@@ -63,6 +63,26 @@ class QuoteResults {
     travelAdviseExtensionPopupClose() {
         return cy.get('.sub-close')
     }    
+
+    ossi_popup_thank_you() {
+        return cy.get('#save-quote-thank-you-popup > .popup-content > .popup-footer > .btn-submit')
+    }
+
+    ossi_popup_login_to_selfserv() {
+        return cy.get('#save-quote-thank-you-popup > .popup-content > .popup-footer > .btn-submit-outline')
+    }
+
+    ossi_email() {
+        return cy.get('#signInFormId > #signInForm > #username')
+    }
+
+    ossi_btn_save_quote() {
+        return cy.get('.d-flex > #\#')
+    }
+
+    ossi_popup_close() {
+        return cy.get('#save-quote-thank-you-popup > .popup-content > .popup-header > .close')
+    }
 }
 
 export default QuoteResults
