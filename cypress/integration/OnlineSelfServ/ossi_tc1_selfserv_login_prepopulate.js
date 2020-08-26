@@ -98,12 +98,17 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
 
         qr.ossi_popup_close().click()
 
-        if (cy.contains('Essentials Cover')) {
-            qr.stEssential().should('be.visible').should('be.enabled').click()  
-        }
-        else {
-            qr.stComprehensive().should('be.visible').should('be.enabled').click() 
-        }               
+        cy.get('.logo').then(elem => {
+            let alt = elem.attr('alt');
+    
+            if (alt === "Staysure") {
+                qr.stComprehensive().should('be.visible').should('be.enabled').click() 
+            }
+            else if (alt === "Avanti") {
+                qr.stEssential().should('be.visible').should('be.enabled').click() 
+            }
+    
+        })            
             
     })
 

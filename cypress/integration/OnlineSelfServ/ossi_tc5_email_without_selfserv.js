@@ -99,8 +99,7 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
             qr.stEssential().should('be.visible').should('be.enabled').click() 
         }
 
-        })
-             
+        })             
             
     })
 

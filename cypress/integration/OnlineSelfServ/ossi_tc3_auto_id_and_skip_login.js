@@ -99,12 +99,17 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
 
         qr.ossi_popup_close().click()
 
-        if (cy.contains('Essentials Cover')) {
-            qr.stEssential().should('be.visible').should('be.enabled').click()  
-        }
-        else {
-            qr.stComprehensive().should('be.visible').should('be.enabled').click() 
-        }               
+        cy.get('.logo').then(elem => {
+            let alt = elem.attr('alt');
+    
+            if (alt === "Staysure") {
+                qr.stComprehensive().should('be.visible').should('be.enabled').click() 
+            }
+            else if (alt === "Avanti") {
+                qr.stEssential().should('be.visible').should('be.enabled').click() 
+            }
+    
+        })              
             
     })
 
