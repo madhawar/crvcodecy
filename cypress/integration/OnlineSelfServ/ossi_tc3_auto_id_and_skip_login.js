@@ -97,7 +97,7 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
     it('Select Policy Type', function () {
         const qr = new QuoteResults()
 
-        qr.ossi_popup_close().click()
+        // qr.ossi_popup_close().click()
 
         cy.get('.logo').then(elem => {
             let alt = elem.attr('alt');

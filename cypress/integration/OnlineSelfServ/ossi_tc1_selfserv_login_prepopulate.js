@@ -96,7 +96,7 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
     it('Select Policy Type', function () {
         const qr = new QuoteResults()
 
-        qr.ossi_popup_close().click()
+        // qr.ossi_popup_close().click()
 
         cy.get('.logo').then(elem => {
             let alt = elem.attr('alt');
