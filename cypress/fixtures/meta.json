@@ -1,6 +1,6 @@
 {
-    "server": "qa09",
-    "domain" : "avn",
+    "server": "uat02",
+    "domain" : "sts",
     "cc": "4111111111111111",
     "cvv": "737",
     "mm": "10",
