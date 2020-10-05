@@ -22,7 +22,7 @@ beforeEach(function () {
     })
 })
 
-describe('IPPRO-377 Email address already registered with MyAccount', function () {    
+describe('Register new self serv account', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -72,8 +72,6 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
     it('Popup SelfServ Account Found - Skip Login and Continue', function() {
         const td = new TravelDetails()
 
-        // td.ossi_popup_email().contains(this.organiser.email)
-        // td.ossi_popup_password().type(this.meta.selfserv_password)
         td.ossi_popup_btn_continue().click()
        
         cy.wait(4000)
@@ -156,6 +154,7 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
 
     it('Thank you page', function() {
         cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
+        cy.contains(this.popups.Self_Serv_Greeting)
     })
   
 })

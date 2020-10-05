@@ -22,13 +22,13 @@ beforeEach(function () {
     })
 })
 
-describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', function () {    
+describe('Login, edit self serv details', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
     })
 
-    it('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', function() {
+    it('Login to Self Serv', function() {
         const td = new TravelDetails()
 
         td.ossi_email().type(this.meta.selfserv_email)
@@ -37,7 +37,23 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
         td.ossi_btn_login_success().click()
     })
 
-    it('IPPRO-376 Logged into MyAccount prepopulated view of QJ', function () {
+    it('Verify whether user logged in successfully', function() {
+        cy.contains(this.popups.Logged_In_Self_Serv)
+    })
+
+    it('Self Serv Edit', function() {
+        const td = new TravelDetails()
+
+        td.selfServEdit().click()
+
+        td.selfServCounty().type('a')
+
+        td.btnSelfServSave().click()
+        td.btnSelfServSaveSuccess().click()
+    })
+
+
+    it('Submit quote details without prepopulated details', function () {
         const td = new TravelDetails()
 
         td.policyST().click()
@@ -78,9 +94,22 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
         cy.wait(4000)
     })
 
+    it('Self Serv Exit Without Save', function() {
+        const md = new MedicalDeclaration()
+
+        md.selfServEdit().click()
+        md.btnSelfServExit().click()
+        md.btnSelfServExitWithoutSave().click()
+
+        md.selfServEdit().click()
+        md.btnSelfServExit().click()
+        md.btnSelfServExitWithSave().click()
+        md.btnSelfServSaveSuccess().click()
+    })
+
     it('Medical Declaration', function () {
         const md = new MedicalDeclaration()
-   
+
         md.traveller1Title().should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
         md.traveller1Name().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         md.traveller1Surname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
@@ -118,15 +147,15 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
         qr.continueOE().should('be.visible').should('be.enabled').click()
     })
 
-    it('Confirmation', function () {
+    it('Submit confirmation without prepopulated details', function () {
         const cf = new Confirmation()
 
-        cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
-        cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
+        // cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
+        // cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
 
-        cf.dobYYYY().select(this.organiser.year)
-        cf.dobMM().select(this.organiser.month)
-        cf.dobDD().select(this.organiser.day)
+        // cf.dobYYYY().select(this.organiser.year)
+        // cf.dobMM().select(this.organiser.month)
+        // cf.dobDD().select(this.organiser.day)
 
         cf.cardType().select('1').should('have.value', '1')
 
@@ -138,6 +167,12 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
         const cf = new Confirmation()
         
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
+    })
+
+    it ('Reduirect Popup', function() {
+        const cf = new Confirmation()       
+
+        cy.contains(this.popups.Self_Serv_Redirect_Popup)
         cy.wait(4000)
     })
 
@@ -153,8 +188,9 @@ describe('IPPRO-374 Add MyAccount Login access to QJ on Traveller details tab', 
         pm.submit().click()
     })
 
-    it('Thank you page', function() {
-        cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
+    it('Redirect to Self Serv', function() {
+        cy.location('pathname').should('eq', this.popups.Self_Serv_Redirect)
+        cy.contains(this.popups.Self_Serv_Greeting)
     })
   
 })

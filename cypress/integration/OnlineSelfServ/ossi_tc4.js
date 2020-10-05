@@ -22,7 +22,7 @@ beforeEach(function () {
     })
 })
 
-describe('IPPRO-375 Add mandatory to email field on QJ in travel details tab', function () {    
+describe('Email, postcode mandatory', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -42,7 +42,7 @@ describe('IPPRO-375 Add mandatory to email field on QJ in travel details tab', f
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
         // td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.meta.selfserv_email)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
-        td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
+        // td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
         td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
@@ -71,6 +71,10 @@ describe('IPPRO-375 Add mandatory to email field on QJ in travel details tab', f
 
     it('Email validation message', function() {
         cy.contains('Please enter email address')
+    })
+
+    it('Postcode validation message', function() {
+        cy.contains('Please enter postcode')
     })
 
 })

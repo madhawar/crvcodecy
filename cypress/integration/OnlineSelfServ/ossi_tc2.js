@@ -22,7 +22,7 @@ beforeEach(function () {
     })
 })
 
-describe('IPPRO-377 Email address already registered with MyAccount', function () {    
+describe('Web quote journey without logging in to self serv', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -40,7 +40,7 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
         td.orgTitle().select(this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.meta.selfserv_email)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type('random@intervest.lk')
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -67,17 +67,6 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
 
         td.submitButton().should('be.visible').should('be.enabled').click()        
         // cy.wait(4000)
-    })
-
-    it('Popup SelfServ Account Found - Login', function() {
-        const td = new TravelDetails()
-
-        // td.ossi_popup_email().contains(this.organiser.email)
-        td.ossi_popup_password().type(this.meta.selfserv_password)
-        td.ossi_popup_btn_login().click()
-        td.ossi_btn_login_success().click()
-       
-        cy.wait(4000)
     })
 
     it('Medical Declaration', function () {
@@ -110,7 +99,7 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
                 qr.stEssential().should('be.visible').should('be.enabled').click() 
             }
     
-        })            
+        })              
             
     })
 
@@ -129,6 +118,9 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
         cf.dobYYYY().select(this.organiser.year)
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
+
+        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear().type('random@intervest.lk')
+        cf.selfServ_Reg_Password().should('be.visible').should('be.enabled').clear().type(this.organiser.password)
 
         cf.cardType().select('1').should('have.value', '1')
 
@@ -157,6 +149,7 @@ describe('IPPRO-377 Email address already registered with MyAccount', function (
 
     it('Thank you page', function() {
         cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
+        cy.contains(this.popups.Thank_You_Page_Register_SS)
     })
   
 })

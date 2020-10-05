@@ -1,4 +1,10 @@
 {
     "Travel_Advice_Extension": "Allows cover for travel to a European Destinations where the FCO advise against all but essential travel (Europe cover also includes Egypt, Morocco, Turkey and Tunisia)",
-    "Travel_Advice_Extension_Label": "European Travel Advice Extension Cover"
+    "Travel_Advice_Extension_Label": "European Travel Advice Extension Cover",
+    "Logged_In_Self_Serv": "We have filled your details based on the information in your account. Please check to make sure that these details are correct.",
+    "Self_Serv_Redirect_Popup": "You will be re-directed once your payment has been processed.",
+    "Self_Serv_Redirect": "/mystaysure/my-policies",
+    "Thank_You_Page": "/travelinsurance/quote/you-are-now-insured",
+    "Thank_You_Page_Register_SS": "You will receive a verification email to activate your account",
+    "Self_Serv_Greeting": "Thank you, your payment has been processed successfully"
 }

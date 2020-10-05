@@ -68,6 +68,14 @@ class Confirmation {
         return cy.get('#passPort')
     }
 
+    selfServ_Reg_Email() {
+        return cy.get('#selfServeRequestedEmail')
+    }
+
+    selfServ_Reg_Password() {
+        return cy.get('#my-account-creation-password')
+    }
+
 }
 
 export default Confirmation
