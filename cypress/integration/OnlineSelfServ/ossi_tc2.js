@@ -22,7 +22,7 @@ beforeEach(function () {
     })
 })
 
-describe('Web quote journey without logging in to self serv', function () {    
+describe('Web quote journey with registering in to self serv', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -40,7 +40,7 @@ describe('Web quote journey without logging in to self serv', function () {
         td.orgTitle().select(this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type('random@intervest.lk')
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.email_random)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -119,7 +119,7 @@ describe('Web quote journey without logging in to self serv', function () {
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
 
-        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear().type('random@intervest.lk')
+        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear().type(this.organiser.email_random)
         cf.selfServ_Reg_Password().should('be.visible').should('be.enabled').clear().type(this.organiser.password)
 
         cf.cardType().select('1').should('have.value', '1')

@@ -22,7 +22,7 @@ beforeEach(function () {
     })
 })
 
-describe('Register new self serv account', function () {    
+describe('Quote journey without self serv logging in/ registering', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
