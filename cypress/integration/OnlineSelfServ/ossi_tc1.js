@@ -179,13 +179,31 @@ describe('Login, edit self serv details', function () {
     it('Barclayscard Smartpay', function () {
         const pm = new Payment()
 
-        pm.cardNumber().clear().type(this.meta.cc)
-        pm.cardHolderName().clear().type(this.meta.name)
-        pm.expiryMonth().select(this.meta.mm)
-        pm.expiryYear().select(this.meta.yy)
-        pm.cvcCode().clear().type(this.meta.cvv)
+        cy.get('.logoImg').then(elem => {
+            let alt = elem.attr('alt');
+    
+            if (alt === "barclaycard") {
+                pm.cardNumberTuna().clear().type(this.meta.cc)
+                pm.cardHolderNameTuna().clear().type(this.meta.name)
+                pm.expiryMonthTuna().select(this.meta.mm)
+                pm.expiryYearTuna().select(this.meta.yy)
+                pm.cvcCodeTuna().clear().type(this.meta.cvv)
+                
+                pm.submitTuna().click()
+            }
+            else {
+                pm.cardNumber().clear().type(this.meta.cc)
+                pm.cardHolderName().clear().type(this.meta.name)
+                pm.expiryMonth().select(this.meta.mm)
+                pm.expiryYear().select(this.meta.yyyy)
+                pm.cvcCode().clear().type(this.meta.cvv)
+                
+                pm.submit().click()
+            }
+    
+        })   
+
         
-        pm.submit().click()
     })
 
     it('Redirect to Self Serv', function() {
