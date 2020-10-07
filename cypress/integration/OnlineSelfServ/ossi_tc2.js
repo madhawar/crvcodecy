@@ -141,7 +141,7 @@ describe('Web quote journey with registering in to self serv', function () {
         pm.cardNumber().clear().type(this.meta.cc)
         pm.cardHolderName().clear().type(this.meta.name)
         pm.expiryMonth().select(this.meta.mm)
-        pm.expiryYear().select(this.meta.yyyy)
+        pm.expiryYear().select(this.meta.yy)
         pm.cvcCode().clear().type(this.meta.cvv)
         
         pm.submit().click()
