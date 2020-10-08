@@ -138,13 +138,29 @@ describe('Web quote journey with registering in to self serv', function () {
     it('Barclayscard Smartpay', function () {
         const pm = new Payment()
 
-        pm.cardNumber().clear().type(this.meta.cc)
-        pm.cardHolderName().clear().type(this.meta.name)
-        pm.expiryMonth().select(this.meta.mm)
-        pm.expiryYear().select(this.meta.yy)
-        pm.cvcCode().clear().type(this.meta.cvv)
-        
-        pm.submit().click()
+        cy.title().then((tit) => {
+            //let host = loc.host;
+    
+            if (tit === "Complete your order - Barclaycard Checkout") {
+                pm.cardNumberTuna().clear().type(this.meta.cc)
+                pm.cardHolderNameTuna().clear().type(this.meta.name)
+                pm.expiryMonthTuna().select(this.meta.mm)
+                pm.expiryYearTuna().select(this.meta.yy)
+                pm.cvcCodeTuna().clear().type(this.meta.cvv)
+                
+                pm.submitTuna().click()
+            }
+            else if (tit === "Step 1: Choose your Payment Method") {
+                pm.cardNumber().clear().type(this.meta.cc)
+                pm.cardHolderName().clear().type(this.meta.name)
+                pm.expiryMonth().select(this.meta.mm)
+                pm.expiryYear().select(this.meta.yyyy)
+                pm.cvcCode().clear().type(this.meta.cvv)
+                
+                pm.submit().click()
+            }
+    
+        }) 
     })
 
     it('Thank you page', function() {

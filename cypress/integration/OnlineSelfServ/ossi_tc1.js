@@ -179,10 +179,10 @@ describe('Login, edit self serv details', function () {
     it('Barclayscard Smartpay', function () {
         const pm = new Payment()
 
-        cy.get('.logoImg').then(elem => {
-            let alt = elem.attr('alt');
+        cy.title().then((tit) => {
+            //let host = loc.host;
     
-            if (alt === "barclaycard") {
+            if (tit === "Complete your order - Barclaycard Checkout") {
                 pm.cardNumberTuna().clear().type(this.meta.cc)
                 pm.cardHolderNameTuna().clear().type(this.meta.name)
                 pm.expiryMonthTuna().select(this.meta.mm)
@@ -191,7 +191,7 @@ describe('Login, edit self serv details', function () {
                 
                 pm.submitTuna().click()
             }
-            else {
+            else if (tit === "Step 1: Choose your Payment Method") {
                 pm.cardNumber().clear().type(this.meta.cc)
                 pm.cardHolderName().clear().type(this.meta.name)
                 pm.expiryMonth().select(this.meta.mm)
@@ -201,11 +201,8 @@ describe('Login, edit self serv details', function () {
                 pm.submit().click()
             }
     
-        })   
-
-        
+        }) 
     })
-
     it('Redirect to Self Serv', function() {
         cy.location('pathname').should('eq', this.popups.Self_Serv_Redirect)
         cy.contains(this.popups.Self_Serv_Greeting)
