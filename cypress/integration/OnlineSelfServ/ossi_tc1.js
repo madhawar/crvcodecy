@@ -46,7 +46,14 @@ describe('Login, edit self serv details', function () {
 
         td.selfServEdit().click()
 
-        td.selfServCounty().type('a')
+        td.selfServTitle().select(this.organiser.organiserTitle)
+        td.selfServFirstName().clear().type(this.organiser.firstname)
+        td.selfServLastName().clear().type(this.organiser.lastname)
+        td.selfServAddress1().clear().type(this.organiser.address_1)
+        td.selfServCity().clear().type(this.organiser.city)
+        td.selfServPostcode().clear().type(this.organiser.postcode)
+        td.selfServCounty().clear().type(this.organiser.county)
+        td.selfServTelephone().clear().type(this.organiser.dayTimeTelephone)
 
         td.btnSelfServSave().click()
         td.btnSelfServSaveSuccess().click()
@@ -204,7 +211,7 @@ describe('Login, edit self serv details', function () {
         }) 
     })
     it('Redirect to Self Serv', function() {
-        cy.location('pathname').should('eq', this.popups.Self_Serv_Redirect)
+        cy.contains(this.popups.Self_Serv_My_Current)
         cy.contains(this.popups.Self_Serv_Greeting)
     })
   
