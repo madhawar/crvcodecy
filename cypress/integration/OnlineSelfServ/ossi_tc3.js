@@ -25,7 +25,10 @@ beforeEach(function () {
 describe('Quote journey without self serv logging in/ registering', function () {    
 
     it('Get Quote', function () {
-        cy.web(this.meta.server, this.meta.domain)
+        // cy.web(this.meta.server, this.meta.domain)
+
+        cy.live_sts_web()
+        // cy.live_avn_web()
     })
 
     it('Travel Details', function () {

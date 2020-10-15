@@ -46,3 +46,15 @@ Cypress.Commands.add("expat", (username, password, server) => {
 Cypress.Commands.add("web", (server, domain) => {
     cy.visit('https://' + server + domain + '.intertrav.co.uk/travelinsurance/quote/policy-details')
 })
+
+Cypress.Commands.add("live_sts_web", () => {
+    cy.visit('https://travelinsurance.staysure.co.uk/quote/policy-details')
+})
+
+Cypress.Commands.add("live_avn_web", () => {
+    cy.visit('https://quote.avantitravelinsurance.co.uk/quote/policy-details')
+})
+
+Cypress.Commands.add("live_exp_web", () => {
+    cy.visit('https://expat.staysure.com/quote/policy-details')
+})

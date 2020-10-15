@@ -25,7 +25,10 @@ beforeEach(function () {
 describe('Login, edit self serv details', function () {    
 
     it('Get Quote', function () {
-        cy.web(this.meta.server, this.meta.domain)
+        // cy.web(this.meta.server, this.meta.domain)
+
+        cy.live_sts_web()
+        // cy.live_avn_web()
     })
 
     it('Login to Self Serv', function() {
