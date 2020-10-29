@@ -25,9 +25,9 @@ beforeEach(function () {
 describe('Email, postcode mandatory', function () {    
 
     it('Get Quote', function () {
-        // cy.web(this.meta.server, this.meta.domain)
+        cy.web(this.meta.server, this.meta.domain)
 
-        cy.live_sts_web()
+        // cy.live_sts_web()
         // cy.live_avn_web()
     })
 

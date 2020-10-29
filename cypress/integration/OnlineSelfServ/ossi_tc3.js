@@ -25,9 +25,9 @@ beforeEach(function () {
 describe('Quote journey without self serv logging in/ registering', function () {    
 
     it('Get Quote', function () {
-        // cy.web(this.meta.server, this.meta.domain)
+        cy.web(this.meta.server, this.meta.domain)
 
-        cy.live_sts_web()
+        // cy.live_sts_web()
         // cy.live_avn_web()
     })
 
@@ -129,6 +129,8 @@ describe('Quote journey without self serv logging in/ registering', function () 
         cf.dobYYYY().select(this.organiser.year)
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
+
+        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
 
         cf.cardType().select('1').should('have.value', '1')
 

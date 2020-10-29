@@ -25,9 +25,9 @@ beforeEach(function () {
 describe('Login, edit self serv details', function () {    
 
     it('Get Quote', function () {
-        // cy.web(this.meta.server, this.meta.domain)
+        cy.web(this.meta.server, this.meta.domain)
 
-        cy.live_sts_web()
+        // cy.live_sts_web()
         // cy.live_avn_web()
     })
 
@@ -55,7 +55,7 @@ describe('Login, edit self serv details', function () {
         td.selfServAddress1().clear().type(this.organiser.address_1)
         td.selfServCity().clear().type(this.organiser.city)
         td.selfServPostcode().clear().type(this.organiser.postcode)
-        td.selfServCounty().clear().type(this.organiser.county)
+        // td.selfServCounty().clear().type(this.organiser.county)
         td.selfServTelephone().clear().type(this.organiser.dayTimeTelephone)
 
         td.btnSelfServSave().click()

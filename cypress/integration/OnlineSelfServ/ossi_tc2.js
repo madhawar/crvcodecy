@@ -25,9 +25,9 @@ beforeEach(function () {
 describe('Web quote journey with registering in to self serv', function () {    
 
     it('Get Quote', function () {
-        // cy.web(this.meta.server, this.meta.domain)
+        cy.web(this.meta.server, this.meta.domain)
 
-        cy.live_sts_web()
+        // cy.live_sts_web()
         // cy.live_avn_web()
     })
 
@@ -69,7 +69,7 @@ describe('Web quote journey with registering in to self serv', function () {
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
         td.submitButton().should('be.visible').should('be.enabled').click()        
-        // cy.wait(4000)
+         cy.wait(4000)
     })
 
     it('Medical Declaration', function () {
@@ -122,7 +122,7 @@ describe('Web quote journey with registering in to self serv', function () {
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
 
-        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear().type(this.organiser.email_random)
+        // cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear().type(this.organiser.email_random)
         cf.selfServ_Reg_Password().should('be.visible').should('be.enabled').clear().type(this.organiser.password)
 
         cf.cardType().select('1').should('have.value', '1')
