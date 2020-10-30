@@ -3,6 +3,7 @@ import MedicalDeclaration from '../PageObjects/MedicalDeclaration'
 import QuoteResults from '../PageObjects/QuoteResults'
 import Confirmation from '../PageObjects/Confirmation'
 import Payment from '../PageObjects/Payment'
+import ThankYou from '../PageObjects/ThankYou'
 
 beforeEach(function () {
     cy.fixture('organiser').then(function (organiser) {

@@ -3,6 +3,7 @@ import MedicalDeclaration from '../PageObjects/MedicalDeclaration'
 import QuoteResults from '../PageObjects/QuoteResults'
 import Confirmation from '../PageObjects/Confirmation'
 import Payment from '../PageObjects/Payment'
+import ThankYou from '../PageObjects/ThankYou'
 
 beforeEach(function () {
     cy.fixture('organiser').then(function (organiser) {
@@ -34,8 +35,8 @@ describe('Login, edit self serv details', function () {
     it('Login to Self Serv', function() {
         const td = new TravelDetails()
 
-        td.ossi_email().type(this.meta.selfserv_email)
-        td.ossi_password().type(this.meta.selfserv_password)
+        td.ossi_email().type(this.organiser.selfserv_email)
+        td.ossi_password().type(this.organiser.selfserv_password)
         td.ossi_btn_login().click()
         td.ossi_btn_login_success().click()
     })
@@ -75,7 +76,7 @@ describe('Login, edit self serv details', function () {
         // td.orgTitle().select(this.organiser.organiserTitle)
         // td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         // td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        // td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.meta.selfserv_email)
+        // td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
         // td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         // td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -213,6 +214,7 @@ describe('Login, edit self serv details', function () {
     
         }) 
     })
+    
     it('Redirect to Self Serv', function() {
         cy.contains(this.popups.Self_Serv_My_Current)
         cy.contains(this.popups.Self_Serv_Greeting)

@@ -3,6 +3,7 @@ import MedicalDeclaration from '../PageObjects/MedicalDeclaration'
 import QuoteResults from '../PageObjects/QuoteResults'
 import Confirmation from '../PageObjects/Confirmation'
 import Payment from '../PageObjects/Payment'
+import ThankYou from '../PageObjects/ThankYou'
 
 beforeEach(function () {
     cy.fixture('organiser').then(function (organiser) {
@@ -22,7 +23,7 @@ beforeEach(function () {
     })
 })
 
-describe('Save Quote - Unregistered User', function () {    
+describe('Online Self Serve Integration - Sprint 4 | Test Case 001: Save Quote > Unregistered User', function () {
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -31,7 +32,7 @@ describe('Save Quote - Unregistered User', function () {
         // cy.live_avn_web()
     })
 
-    it('Travel Details', function () {
+    it('Fill & submit Travel Details', function () {
         const td = new TravelDetails()
 
         function Name_Alpha_Numeric() {
@@ -39,12 +40,12 @@ describe('Save Quote - Unregistered User', function () {
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
             for (var i = 0; i < 10; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
 
             return text;
         }
 
-        const randomName = Name_Alpha_Numeric()   
+        const randomName = Name_Alpha_Numeric()
 
         td.policyST().click()
         td.cruiseNo().click()
@@ -80,11 +81,11 @@ describe('Save Quote - Unregistered User', function () {
 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
-        td.submitButton().should('be.visible').should('be.enabled').click()        
+        td.submitButton().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
     })
 
-    it('Medical Declaration', function () {
+    it('Fill & submit Medical Declaration', function () {
         const md = new MedicalDeclaration()
 
         md.traveller1Title().should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
@@ -99,46 +100,46 @@ describe('Save Quote - Unregistered User', function () {
         cy.wait(4000)
     })
 
-    it('Save Your Quote', function() {
-        const qr = new QuoteResults()      
+    it('Popup: Save Your Quote', function () {
+        const qr = new QuoteResults()
 
         qr.ossi_btn_save_quote().click()
-        qr.ossi_btn_save_quote_discard().click()
-
-        qr.ossi_btn_save_quote().click()
-        qr.ossi_save_quote_password().clear().type(this.meta.selfserv_password)
+        qr.ossi_save_quote_password().type(this.organiser.selfserv_password)
         qr.ossi_btn_save_quote_save().click()
+    })
 
+    it('Popup: Your quote has been saved', function () {
+        const qr = new QuoteResults()
+
+        cy.contains('You will receive a verification email to create an account and retrieve your quote')
         qr.ossi_btn_save_quote_save_quote_success().click()
     })
 
-    it('Select Policy Type', function () {
+    it('Select a policy package', function () {
         const qr = new QuoteResults()
 
         // qr.ossi_popup_close().click()
 
         cy.get('.logo').then(elem => {
             let alt = elem.attr('alt');
-    
-            if (alt === "Staysure") {
-                qr.stComprehensive().should('be.visible').should('be.enabled').click() 
-            }
-            else if (alt === "Avanti") {
-                qr.stEssential().should('be.visible').should('be.enabled').click() 
-            }
-    
-        })            
-            
-    })
-   
 
-    it('Submit Quote Results', function() {
+            if (alt === "Staysure") {
+                qr.stComprehensive().should('be.visible').should('be.enabled').click()
+            } else if (alt === "Avanti") {
+                qr.stEssential().should('be.visible').should('be.enabled').click()
+            }
+
+        })
+        cy.wait(4000)
+    })
+
+    it('Select ACOs & submit Quote Results', function () {
         const qr = new QuoteResults()
 
         qr.continueOE().should('be.visible').should('be.enabled').click()
     })
-
-    it('Submit Confirmation', function () {
+   
+    it('Fill & submit Confirmation', function () {
         const cf = new Confirmation()
 
         cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
@@ -153,51 +154,54 @@ describe('Save Quote - Unregistered User', function () {
         cf.cardType().select('1').should('have.value', '1')
 
         cf.userDeclaration().click('left')
-        cf.userAccept().click('left')        
+        cf.userAccept().click('left')
     })
 
-    it ('Purchase Policy', function() {
+    it('Your Account section should be hidden', function() {
+        cy.contains('view your documents immediately and amend your policy online at any time.').should('not.exist')
+    })
+
+    it('Proceed to payment gateway', function () {
         const cf = new Confirmation()
-        
+
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
+        cy.wait(4000)  
     })
 
-    it ('Redirect Popup', function() {
-        const cf = new Confirmation()       
-
-        cy.contains(this.popups.Self_Serv_Redirect_Popup)
-        cy.wait(4000)
-    })
-
-    it('Barclayscard Smartpay', function () {
+    it('Fill & submit credit card details and purchase policy', function () {
         const pm = new Payment()
 
         cy.title().then((tit) => {
             //let host = loc.host;
-    
+
             if (tit === "Complete your order - Barclaycard Checkout") {
                 pm.cardNumberTuna().clear().type(this.meta.cc)
                 pm.cardHolderNameTuna().clear().type(this.meta.name)
                 pm.expiryMonthTuna().select(this.meta.mm)
                 pm.expiryYearTuna().select(this.meta.yy)
                 pm.cvcCodeTuna().clear().type(this.meta.cvv)
-                
+
                 pm.submitTuna().click()
-            }
-            else if (tit === "Step 1: Choose your Payment Method") {
+            } else if (tit === "Step 1: Choose your Payment Method") {
                 pm.cardNumber().clear().type(this.meta.cc)
                 pm.cardHolderName().clear().type(this.meta.name)
                 pm.expiryMonth().select(this.meta.mm)
                 pm.expiryYear().select(this.meta.yyyy)
                 pm.cvcCode().clear().type(this.meta.cvv)
-                
+
                 pm.submit().click()
             }
-    
-        }) 
+
+        })
     })
-    it('Redirect to Self Serv', function() {
-        cy.contains(this.popups.Self_Serv_Greeting)
+
+    it('Load Thank You page for confirmation', function () {
+        const ty = new ThankYou()
+
+        cy.contains(this.popups.Thank_You_Page_Register_SS)
+        cy.contains(this.popups.Thank_You_Page_Greeting)
+        ty.SS_Login().should('be.visible')
     })
-  
+
+
 })

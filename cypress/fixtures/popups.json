@@ -6,6 +6,7 @@
     "Self_Serv_Redirect": "/mystaysure/my-policies",
     "Thank_You_Page": "/travelinsurance/quote/you-are-now-insured",
     "Thank_You_Page_Register_SS": "You will receive a verification email to activate your account",
+    "Thank_You_Page_Greeting": "Thank you, your payment has been processed successfully",
     "Self_Serv_Greeting": "Thank you, your payment has been processed successfully",
     "Self_Serv_My_Current": "My Current Policies"
 }

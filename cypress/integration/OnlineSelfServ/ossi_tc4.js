@@ -3,6 +3,7 @@ import MedicalDeclaration from '../PageObjects/MedicalDeclaration'
 import QuoteResults from '../PageObjects/QuoteResults'
 import Confirmation from '../PageObjects/Confirmation'
 import Payment from '../PageObjects/Payment'
+import ThankYou from '../PageObjects/ThankYou'
 
 beforeEach(function () {
     cy.fixture('organiser').then(function (organiser) {
@@ -43,7 +44,7 @@ describe('Email, postcode mandatory', function () {
         td.orgTitle().select(this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        // td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.meta.selfserv_email)
+        // td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         // td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 

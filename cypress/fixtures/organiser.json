@@ -14,8 +14,12 @@
     "address_1": "345 Cave Stone Road",
     "city": "Bedrock",
     "county" : "Rockfalls",
-
     "dayTimeTelephoneEXP": "07712570250",
     "postcodeEXP": "70000",
-    "passportEXP": "42069"    
+    "passportEXP": "42069",    
+
+    "selfserv_email": "madhawa@intervest.lk",
+    "selfserv_password": "January*27",
+
+    "self_serv_inactive": "madhawar@protonmail.com"
 }

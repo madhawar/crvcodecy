@@ -23,7 +23,7 @@ beforeEach(function () {
     })
 })
 
-describe('Quote journey without self serv logging in/ registering', function () {    
+describe('Online Self Serve Integration - Sprint 4 | Test Case 004: Save Quote > Registered User > Inactive Account', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -32,7 +32,7 @@ describe('Quote journey without self serv logging in/ registering', function () 
         // cy.live_avn_web()
     })
 
-    it('Travel Details', function () {
+    it('Fill & submit Travel Details', function () {
         const td = new TravelDetails()
 
         td.policyST().click()
@@ -44,7 +44,7 @@ describe('Quote journey without self serv logging in/ registering', function () 
         td.orgTitle().select(this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.self_serv_inactive)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -70,10 +70,10 @@ describe('Quote journey without self serv logging in/ registering', function () 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
         td.submitButton().should('be.visible').should('be.enabled').click()        
-        // cy.wait(4000)
+        cy.wait(4000)
     })
 
-    it('Popup SelfServ Account Found - Skip Login and Continue', function() {
+    it('Popup: This email address is already registered > Continue Quote', function() {
         const td = new TravelDetails()
 
         td.ossi_popup_btn_continue().click()
@@ -81,9 +81,9 @@ describe('Quote journey without self serv logging in/ registering', function () 
         cy.wait(4000)
     })
 
-    it('Medical Declaration', function () {
+    it('Fill & submit Medical Declaration', function () {
         const md = new MedicalDeclaration()
-   
+
         md.traveller1Title().should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
         md.traveller1Name().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         md.traveller1Surname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
@@ -96,7 +96,23 @@ describe('Quote journey without self serv logging in/ registering', function () 
         cy.wait(4000)
     })
 
-    it('Select Policy Type', function () {
+    it('Popup: Save Your Quote', function() {
+        const qr = new QuoteResults()      
+ 
+        qr.ossi_btn_save_quote().click()
+        qr.ossi_save_quote_password().clear().type(this.organiser.selfserv_password)
+        qr.ossi_btn_save_quote_save().click()
+    })
+
+    it('Inactive account popup', function() {
+        const qr = new QuoteResults()      
+
+        cy.contains('This account has not been activated. Please verify your email address using the link you have been sent.')
+
+        qr.ossi_btn_save_quote_inactive().click()
+    })
+
+    it('Select a policy package', function () {
         const qr = new QuoteResults()
 
         // qr.ossi_popup_close().click()
@@ -111,19 +127,19 @@ describe('Quote journey without self serv logging in/ registering', function () 
                 qr.stEssential().should('be.visible').should('be.enabled').click() 
             }
     
-        })              
-            
+        })            
+        cy.wait(4000)     
     })
-
-    it('Submit Quote Results', function() {
+   
+    it('Select ACOs & submit Quote Results', function() {
         const qr = new QuoteResults()
 
         qr.continueOE().should('be.visible').should('be.enabled').click()
     })
 
-    it('Confirmation', function () {
+    it('Fill & submit Confirmation', function () {
         const cf = new Confirmation()
-
+      
         cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
         cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
 
@@ -139,14 +155,18 @@ describe('Quote journey without self serv logging in/ registering', function () 
         cf.userAccept().click('left')        
     })
 
-    it ('Purchase Policy', function() {
+    it('Your Account section should be hidden', function() {
+        cy.contains('view your documents immediately and amend your policy online at any time.').should('not.exist')
+    })
+
+    it ('Proceed to payment gateway', function() {
         const cf = new Confirmation()
         
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
-        cy.wait(4000)
+        cy.wait(4000)    
     })
 
-    it('Barclayscard Smartpay', function () {
+    it('Fill & submit credit card details and purchase policy', function () {
         const pm = new Payment()
 
         cy.title().then((tit) => {
@@ -174,9 +194,11 @@ describe('Quote journey without self serv logging in/ registering', function () 
         }) 
     })
 
-    it('Thank you page', function() {
-        cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
-        cy.contains(this.popups.Self_Serv_Greeting)
+    it('Thank You Page', function() {
+        const ty = new ThankYou()
+
+        cy.contains(this.popups.Thank_You_Page_Greeting)
+        ty.SS_Login().should('be.visible')
     })
   
 })

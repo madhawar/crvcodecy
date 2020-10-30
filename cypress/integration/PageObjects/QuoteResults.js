@@ -64,6 +64,10 @@ class QuoteResults {
         return cy.get('.sub-close')
     }    
 
+    btn_change_details() {
+        return cy.get('#change-details')
+    }
+
     ossi_popup_thank_you() {
         return cy.get('#save-quote-thank-you-popup > .popup-content > .popup-footer > .btn-submit')
     }
@@ -106,6 +110,18 @@ class QuoteResults {
 
     ossi_btn_save_quote_error() {
         return cy.get('#save-quote-error-popup > .popup-content > .popup-footer > .btn')
+    }
+
+    ossi_btn_save_quote_inactive() {
+        return cy.get('#save-quote-inactive-popup > .popup-content > .popup-footer > .btn')
+    }
+
+    ossi_btn_save_quote_return() {
+        return cy.get('#return-to-quote-my-account')
+    }
+
+    ossi_btn_save_quote_ss_login() {
+        return cy.get('#save-quote-thank-you-popup > .popup-content > .popup-footer > .btn-submit-outline')
     }
 }
 

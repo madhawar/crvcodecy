@@ -23,7 +23,7 @@ beforeEach(function () {
     })
 })
 
-describe('Quote journey without self serv logging in/ registering', function () {    
+describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote', function () {
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -32,8 +32,20 @@ describe('Quote journey without self serv logging in/ registering', function () 
         // cy.live_avn_web()
     })
 
-    it('Travel Details', function () {
+    it('Fill & submit Travel Details', function () {
         const td = new TravelDetails()
+
+        function Name_Alpha_Numeric() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (var i = 0; i < 10; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+
+        const randomName = Name_Alpha_Numeric()
 
         td.policyST().click()
         td.cruiseNo().click()
@@ -44,7 +56,7 @@ describe('Quote journey without self serv logging in/ registering', function () 
         td.orgTitle().select(this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(randomName + '@intervest.lk')
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -69,21 +81,13 @@ describe('Quote journey without self serv logging in/ registering', function () 
 
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
-        td.submitButton().should('be.visible').should('be.enabled').click()        
-        // cy.wait(4000)
-    })
-
-    it('Popup SelfServ Account Found - Skip Login and Continue', function() {
-        const td = new TravelDetails()
-
-        td.ossi_popup_btn_continue().click()
-       
+        td.submitButton().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
     })
 
-    it('Medical Declaration', function () {
+    it('Fill & submit Medical Declaration', function () {
         const md = new MedicalDeclaration()
-   
+
         md.traveller1Title().should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
         md.traveller1Name().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         md.traveller1Surname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
@@ -96,87 +100,84 @@ describe('Quote journey without self serv logging in/ registering', function () 
         cy.wait(4000)
     })
 
-    it('Select Policy Type', function () {
+    it('Save Quote', function () {
         const qr = new QuoteResults()
 
-        // qr.ossi_popup_close().click()
-
-        cy.get('.logo').then(elem => {
-            let alt = elem.attr('alt');
-    
-            if (alt === "Staysure") {
-                qr.stComprehensive().should('be.visible').should('be.enabled').click() 
-            }
-            else if (alt === "Avanti") {
-                qr.stEssential().should('be.visible').should('be.enabled').click() 
-            }
-    
-        })              
-            
+        cy.contains('Not ready to buy yet?')
+        qr.ossi_btn_save_quote().click()
     })
 
-    it('Submit Quote Results', function() {
+    it('Popup: Save Your Quote', function () {
         const qr = new QuoteResults()
 
-        qr.continueOE().should('be.visible').should('be.enabled').click()
+        cy.contains('8+ Characters long')
+        cy.contains('Must use one number or special character')
+        cy.contains('Mix of upper and lower case letters')
+
+        qr.ossi_btn_save_quote_discard().click()
     })
 
-    it('Confirmation', function () {
-        const cf = new Confirmation()
+    it('Click Change Details Button', function () {
+        const qr = new QuoteResults()
 
-        cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
-        cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
-
-        cf.dobYYYY().select(this.organiser.year)
-        cf.dobMM().select(this.organiser.month)
-        cf.dobDD().select(this.organiser.day)
-
-        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
-
-        cf.cardType().select('1').should('have.value', '1')
-
-        cf.userDeclaration().click('left')
-        cf.userAccept().click('left')        
+        qr.btn_change_details().click()
     })
 
-    it ('Purchase Policy', function() {
-        const cf = new Confirmation()
-        
-        cf.purchasePolicy().should('be.visible').should('be.enabled').click()
+    it('Edit & submit Travel Details', function () {
+        const td = new TravelDetails()
+
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.self_serv_inactive)
+
+        td.submitButton().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
     })
 
-    it('Barclayscard Smartpay', function () {
-        const pm = new Payment()
+    it('Popup: This email address is already registered > Continue Quote', function () {
+        const td = new TravelDetails()
 
-        cy.title().then((tit) => {
-            //let host = loc.host;
-    
-            if (tit === "Complete your order - Barclaycard Checkout") {
-                pm.cardNumberTuna().clear().type(this.meta.cc)
-                pm.cardHolderNameTuna().clear().type(this.meta.name)
-                pm.expiryMonthTuna().select(this.meta.mm)
-                pm.expiryYearTuna().select(this.meta.yy)
-                pm.cvcCodeTuna().clear().type(this.meta.cvv)
-                
-                pm.submitTuna().click()
-            }
-            else if (tit === "Step 1: Choose your Payment Method") {
-                pm.cardNumber().clear().type(this.meta.cc)
-                pm.cardHolderName().clear().type(this.meta.name)
-                pm.expiryMonth().select(this.meta.mm)
-                pm.expiryYear().select(this.meta.yyyy)
-                pm.cvcCode().clear().type(this.meta.cvv)
-                
-                pm.submit().click()
-            }
-    
-        }) 
+        td.ossi_popup_btn_continue().click()
+
+        cy.wait(4000)
     })
 
-    it('Thank you page', function() {
-        cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
-        cy.contains(this.popups.Self_Serv_Greeting)
+    it('Edit & submit Medical Declaration', function () {
+        const md = new MedicalDeclaration()
+
+        md.medicalAccept().click()
+        md.medicalAcceptConf().click()
+
+        md.traveller1MedicalNo().click()
+        md.submitMedical().should('be.visible').should('be.enabled').click()
+        cy.wait(4000)
     })
-  
+
+    it('Save Quote', function () {
+        const qr = new QuoteResults()
+
+        cy.contains('Not ready to buy yet?')
+        qr.ossi_btn_save_quote().click()
+    })
+
+    it('Popup: Save Your Quote', function () {
+        const qr = new QuoteResults()
+
+        cy.contains('8+ Characters long')
+        cy.contains('Must use one number or special character')
+        cy.contains('Mix of upper and lower case letters')
+    })
+
+    it('Popup: Save Your Quote > Empty password validation', function () {
+        const qr = new QuoteResults()
+
+        qr.ossi_btn_save_quote_save().click()
+        cy.contains('Please enter a Password')
+    })
+
+    it('Create a Self Serv account', function () {
+        const qr = new QuoteResults()
+
+        qr.ossi_save_quote_password().type(this.organiser.selfserv_password)
+        qr.ossi_btn_save_quote_save().click()
+    })
+
 })
