@@ -22,7 +22,7 @@ beforeEach(function () {
     })
 })
 
-describe('Web quote journey with registering in to self serv', function () {    
+describe('Save Quote - Unregistered User', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -81,12 +81,12 @@ describe('Web quote journey with registering in to self serv', function () {
         td.returnDate().should('be.visible').should('be.enabled').clear().type(this.quote.return)
 
         td.submitButton().should('be.visible').should('be.enabled').click()        
-         cy.wait(4000)
+        cy.wait(4000)
     })
 
     it('Medical Declaration', function () {
         const md = new MedicalDeclaration()
-   
+
         md.traveller1Title().should('be.visible').should('be.enabled').select(this.organiser.organiserTitle)
         md.traveller1Name().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         md.traveller1Surname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
@@ -97,6 +97,19 @@ describe('Web quote journey with registering in to self serv', function () {
         md.traveller1MedicalNo().click()
         md.submitMedical().should('be.visible').should('be.enabled').click()
         cy.wait(4000)
+    })
+
+    it('Save Your Quote', function() {
+        const qr = new QuoteResults()      
+
+        qr.ossi_btn_save_quote().click()
+        qr.ossi_btn_save_quote_discard().click()
+
+        qr.ossi_btn_save_quote().click()
+        qr.ossi_save_quote_password().clear().type(this.meta.selfserv_password)
+        qr.ossi_btn_save_quote_save().click()
+
+        qr.ossi_btn_save_quote_save_quote_success().click()
     })
 
     it('Select Policy Type', function () {
@@ -114,9 +127,10 @@ describe('Web quote journey with registering in to self serv', function () {
                 qr.stEssential().should('be.visible').should('be.enabled').click() 
             }
     
-        })              
+        })            
             
     })
+   
 
     it('Submit Quote Results', function() {
         const qr = new QuoteResults()
@@ -124,7 +138,7 @@ describe('Web quote journey with registering in to self serv', function () {
         qr.continueOE().should('be.visible').should('be.enabled').click()
     })
 
-    it('Confirmation', function () {
+    it('Submit Confirmation', function () {
         const cf = new Confirmation()
 
         cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
@@ -134,8 +148,7 @@ describe('Web quote journey with registering in to self serv', function () {
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
 
-        // cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear().type(randomName + '@intervest.lk')
-        cf.selfServ_Reg_Password().should('be.visible').should('be.enabled').clear().type(this.organiser.password)
+        // cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
 
         cf.cardType().select('1').should('have.value', '1')
 
@@ -147,6 +160,12 @@ describe('Web quote journey with registering in to self serv', function () {
         const cf = new Confirmation()
         
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
+    })
+
+    it ('Redirect Popup', function() {
+        const cf = new Confirmation()       
+
+        cy.contains(this.popups.Self_Serv_Redirect_Popup)
         cy.wait(4000)
     })
 
@@ -177,10 +196,8 @@ describe('Web quote journey with registering in to self serv', function () {
     
         }) 
     })
-
-    it('Thank you page', function() {
-        cy.location('pathname').should('eq', '/travelinsurance/quote/you-are-now-insured')
-        cy.contains(this.popups.Thank_You_Page_Register_SS)
+    it('Redirect to Self Serv', function() {
+        cy.contains(this.popups.Self_Serv_Greeting)
     })
   
 })

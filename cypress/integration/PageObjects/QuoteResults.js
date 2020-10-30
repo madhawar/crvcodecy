@@ -83,6 +83,30 @@ class QuoteResults {
     ossi_popup_close() {
         return cy.get('#save-quote-thank-you-popup > .popup-content > .popup-header > .close')
     }
+
+    ossi_btn_save_quote() {
+        return cy.get('#my-account-save-quote-btn')
+    }
+
+    ossi_save_quote_password() {
+        return cy.get('#my-account-password-save-quote')
+    }
+
+    ossi_btn_save_quote_discard() {
+        return cy.get('#my-account-continue-quote-btn')
+    }
+
+    ossi_btn_save_quote_save() {
+        return cy.get('#my-account-quote-mapping-btn')
+    }
+
+    ossi_btn_save_quote_save_quote_success() {
+        return cy.get('#return-to-quote-creation')
+    }
+
+    ossi_btn_save_quote_error() {
+        return cy.get('#save-quote-error-popup > .popup-content > .popup-footer > .btn')
+    }
 }
 
 export default QuoteResults
