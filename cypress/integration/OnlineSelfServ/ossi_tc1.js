@@ -214,7 +214,7 @@ describe('Login, edit self serv details', function () {
     
         }) 
     })
-    
+
     it('Redirect to Self Serv', function() {
         cy.contains(this.popups.Self_Serv_My_Current)
         cy.contains(this.popups.Self_Serv_Greeting)

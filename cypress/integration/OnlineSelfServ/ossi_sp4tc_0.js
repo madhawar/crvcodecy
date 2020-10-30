@@ -53,7 +53,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         td.partyIndividual().click()
         td.traveller1Age().should('be.visible').should('be.enabled').clear().type(this.quote.traveller_1)
 
-        td.orgTitle().select(this.organiser.organiserTitle)
+        td.orgTitle().select(this.organiser.organiserTitle).should('have.value', this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
         td.orgEmail().should('be.visible').should('be.enabled').clear().type(randomName + '@intervest.lk')
