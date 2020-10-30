@@ -111,7 +111,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 001: Save Quote >
     it('Popup: Your quote has been saved', function () {
         const qr = new QuoteResults()
 
-        cy.contains('You will receive a verification email to create an account and retrieve your quote')
+        cy.contains(this.popups.Save_Quote_New_Account)
         qr.ossi_btn_save_quote_save_quote_success().click()
     })
 

@@ -107,7 +107,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 004: Save Quote >
     it('Inactive account popup', function() {
         const qr = new QuoteResults()      
 
-        cy.contains('This account has not been activated. Please verify your email address using the link you have been sent.')
+        cy.contains(this.popups.Save_Quote_Inactive)
 
         qr.ossi_btn_save_quote_inactive().click()
     })

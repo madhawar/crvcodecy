@@ -107,7 +107,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 002: Save Quote >
     it('Popup: Thank You', function () {
         const qr = new QuoteResults()
 
-        cy.contains('Your quote has been saved. You can access your quote through your MyStaysure account.')
+        cy.contains(this.popups.Save_Quote_Save_Success)
 
         qr.ossi_btn_save_quote_return().click()
     })

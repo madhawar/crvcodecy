@@ -103,16 +103,16 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
     it('Save Quote', function () {
         const qr = new QuoteResults()
 
-        cy.contains('Not ready to buy yet?')
+        cy.contains(this.popups.Save_Quote_Label)
         qr.ossi_btn_save_quote().click()
     })
 
     it('Popup: Save Your Quote', function () {
         const qr = new QuoteResults()
 
-        cy.contains('8+ Characters long')
-        cy.contains('Must use one number or special character')
-        cy.contains('Mix of upper and lower case letters')
+        cy.contains(this.popups.Save_Quote_Password_Condition_1)
+        cy.contains(this.popups.Save_Quote_Password_Condition_2)
+        cy.contains(this.popups.Save_Quote_Password_Condition_3)
 
         qr.ossi_btn_save_quote_discard().click()
     })
@@ -154,30 +154,31 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
     it('Save Quote', function () {
         const qr = new QuoteResults()
 
-        cy.contains('Not ready to buy yet?')
+        cy.contains(this.popups.Save_Quote_Label)
         qr.ossi_btn_save_quote().click()
     })
 
     it('Popup: Save Your Quote', function () {
         const qr = new QuoteResults()
 
-        cy.contains('8+ Characters long')
-        cy.contains('Must use one number or special character')
-        cy.contains('Mix of upper and lower case letters')
+        cy.contains(this.popups.Save_Quote_Password_Condition_1)
+        cy.contains(this.popups.Save_Quote_Password_Condition_2)
+        cy.contains(this.popups.Save_Quote_Password_Condition_3)
     })
 
     it('Popup: Save Your Quote > Empty password validation', function () {
         const qr = new QuoteResults()
 
         qr.ossi_btn_save_quote_save().click()
-        cy.contains('Please enter a Password')
+        cy.contains(this.popups.Password_Validation)
     })
 
-    it('Create a Self Serv account', function () {
+    it('Popup: Save Your Quote > Invalid password validation', function () {
         const qr = new QuoteResults()
 
-        qr.ossi_save_quote_password().type(this.organiser.selfserv_password)
+        qr.ossi_save_quote_password().type('hmm hmm hmm hari hari hari')
         qr.ossi_btn_save_quote_save().click()
+        cy.contains(this.popups.Password_Invalid_Error)        
     })
 
 })

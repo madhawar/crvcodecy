@@ -106,7 +106,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 003: Save Quote >
     it('Data conflict popup', function () {
         const qr = new QuoteResults()
 
-        cy.contains('As this email address is already registered, we are unable to save your quote. Please contact customer services.')
+        cy.contains(this.popups.Save_Quote_Data_Conflict)
 
         qr.ossi_btn_save_quote_error().click()
     })
