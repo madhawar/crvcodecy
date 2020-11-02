@@ -56,7 +56,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         td.orgTitle().select(this.organiser.organiserTitle).should('have.value', this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(randomName + '@intervest.lk')
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.email)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -110,13 +110,24 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
     it('Popup: Save Your Quote', function () {
         const qr = new QuoteResults()
 
-        cy.contains(this.popups.Save_Quote_Password_Condition_1)
-        cy.contains(this.popups.Save_Quote_Password_Condition_2)
-        cy.contains(this.popups.Save_Quote_Password_Condition_3)
+        qr.ossi_btn_save_quote().click()
+        qr.ossi_save_quote_password().clear().type(this.organiser.selfserv_password_invalid)
+        qr.ossi_btn_save_quote_save().click()
+        cy.contains(this.popups.Password_Invalid_Error)
 
-        qr.ossi_btn_save_quote_discard().click()
+        qr.ossi_save_quote_password().clear().type(this.organiser.selfserv_password)
+        qr.ossi_btn_save_quote_save().click()
     })
 
+    it('Popup: Thank You', function () {
+        const qr = new QuoteResults()
+
+        cy.contains(this.popups.Save_Quote_Save_Success)
+
+        qr.ossi_btn_save_quote_return().click()
+    })
+
+ 
     it('Click Change Details Button', function () {
         const qr = new QuoteResults()
 
@@ -125,6 +136,8 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
 
     it('Edit & submit Travel Details', function () {
         const td = new TravelDetails()
+
+        cy.contains(this.popups.Logged_In_Self_Serv)
 
         td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.self_serv_inactive)
 
@@ -176,7 +189,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
     it('Popup: Save Your Quote > Invalid password validation', function () {
         const qr = new QuoteResults()
 
-        qr.ossi_save_quote_password().type('hmm hmm hmm hari hari hari')
+        qr.ossi_save_quote_password().type('hmmhmmhariharihari@9A')
         qr.ossi_btn_save_quote_save().click()
         cy.contains(this.popups.Password_Invalid_Error)        
     })

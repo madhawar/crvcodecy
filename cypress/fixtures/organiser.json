@@ -2,9 +2,9 @@
     "password": "January*27",
     "stay": "stay",
     "avanti": "avanti",
-    "organiserTitle": "Mr",
-    "firstname": "Madhawa",
-    "lastname": "Ratnayake",
+    "organiserTitle": "Miss",
+    "firstname": "Enola",
+    "lastname": "Holmes",
     "dayTimeTelephone": "0777837227",
     "email": "madhawa_ist@yahoo.com",
     "postcode": "NN47YB",
@@ -15,12 +15,15 @@
     "address_2": "Rushmills",
     "city": "Northampton",
     "county" : "Northamptonshire",
-    "dayTimeTelephoneEXP": "07712570250",
+    "dayTimeTelephoneEXP": "07778372270",
     "postcodeEXP": "70000",
     "passportEXP": "42069",    
 
-    "selfserv_email": "madhawa@intervest.lk",
+    "selfserv_email": "madhawa_ist@tutanota.com",
     "selfserv_password": "January*27",
+    "selfserv_password_invalid": "January*72",
 
-    "self_serv_inactive": "madhawar@protonmail.com"
+    "self_serv_inactive": "madhawar@protonmail.com",
+
+    "email_intervest": "madhawa@intervest.lk"
 }
