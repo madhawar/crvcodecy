@@ -56,7 +56,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         td.orgTitle().select(this.organiser.organiserTitle).should('have.value', this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.email)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -134,7 +134,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         qr.btn_change_details().click()
     })
 
-    it('Edit & submit Travel Details', function () {
+    it('User should be already logged in to Self Serv. Edit & submit Travel Details', function () {
         const td = new TravelDetails()
 
         cy.contains(this.popups.Logged_In_Self_Serv)
