@@ -147,8 +147,6 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 004: Save Quote >
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
 
-        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
-
         cf.cardType().select('1').should('have.value', '1')
 
         cf.userDeclaration().click('left')

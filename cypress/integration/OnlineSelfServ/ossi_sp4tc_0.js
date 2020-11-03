@@ -56,7 +56,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         td.orgTitle().select(this.organiser.organiserTitle).should('have.value', this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email_new)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -85,6 +85,14 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         cy.wait(4000)
     })
 
+    it('Popup: This email address is already registered > Continue Quote', function () {
+        const td = new TravelDetails()
+
+        td.ossi_popup_btn_continue().click()
+
+        cy.wait(4000)
+    })
+
     it('Fill & submit Medical Declaration', function () {
         const md = new MedicalDeclaration()
 
@@ -107,10 +115,27 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         qr.ossi_btn_save_quote().click()
     })
 
-    it('Popup: Save Your Quote', function () {
+    // it('Popup: Save Your Quote > Password criteria text', function () {
+    //     const qr = new QuoteResults()
+
+    //     qr.ossi_btn_save_quote_save().contains(this.popups.Save_Quote_Button_Save)
+    //     qr.ossi_btn_save_quote_discard().contains(this.popups.Save_Quote_Button_Continue)
+       
+    //     cy.contains(this.popups.Save_Quote_Password_Condition_1)
+    //     cy.contains(this.popups.Save_Quote_Password_Condition_2)
+    //     cy.contains(this.popups.Save_Quote_Password_Condition_3)
+    // })
+
+    it('Popup: Save Your Quote > Empty password validation', function () {
         const qr = new QuoteResults()
 
-        qr.ossi_btn_save_quote().click()
+        qr.ossi_btn_save_quote_save().click()
+        cy.contains(this.popups.Password_Validation)
+    })
+
+    it('Popup: Save Your Quote > Invalid password', function () {
+        const qr = new QuoteResults()
+
         qr.ossi_save_quote_password().clear().type(this.organiser.selfserv_password_invalid)
         qr.ossi_btn_save_quote_save().click()
         cy.contains(this.popups.Password_Invalid_Error)
@@ -139,17 +164,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
 
         cy.contains(this.popups.Logged_In_Self_Serv)
 
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.self_serv_inactive)
-
         td.submitButton().should('be.visible').should('be.enabled').click()
-        cy.wait(4000)
-    })
-
-    it('Popup: This email address is already registered > Continue Quote', function () {
-        const td = new TravelDetails()
-
-        td.ossi_popup_btn_continue().click()
-
         cy.wait(4000)
     })
 
@@ -164,34 +179,8 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         cy.wait(4000)
     })
 
-    it('Save Quote', function () {
-        const qr = new QuoteResults()
-
-        cy.contains(this.popups.Save_Quote_Label)
-        qr.ossi_btn_save_quote().click()
-    })
-
-    it('Popup: Save Your Quote', function () {
-        const qr = new QuoteResults()
-
-        cy.contains(this.popups.Save_Quote_Password_Condition_1)
-        cy.contains(this.popups.Save_Quote_Password_Condition_2)
-        cy.contains(this.popups.Save_Quote_Password_Condition_3)
-    })
-
-    it('Popup: Save Your Quote > Empty password validation', function () {
-        const qr = new QuoteResults()
-
-        qr.ossi_btn_save_quote_save().click()
-        cy.contains(this.popups.Password_Validation)
-    })
-
-    it('Popup: Save Your Quote > Invalid password validation', function () {
-        const qr = new QuoteResults()
-
-        qr.ossi_save_quote_password().type('hmmhmmhariharihari@9A')
-        qr.ossi_btn_save_quote_save().click()
-        cy.contains(this.popups.Password_Invalid_Error)        
+    it('Save Quote should not be visible', function () {
+        cy.contains(this.popups.Save_Quote_Label).should('not.exist')
     })
 
 })

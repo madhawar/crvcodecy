@@ -115,6 +115,10 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 001: Save Quote >
         qr.ossi_btn_save_quote_save_quote_success().click()
     })
 
+    it('Save Quote should not be visible', function () {
+        cy.contains(this.popups.Save_Quote_Label).should('not.exist')
+    })
+
     it('Select a policy package', function () {
         const qr = new QuoteResults()
 

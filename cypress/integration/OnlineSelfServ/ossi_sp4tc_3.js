@@ -42,11 +42,11 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 003: Save Quote >
         td.traveller1Age().should('be.visible').should('be.enabled').clear().type(this.quote.traveller_1)
 
         td.orgTitle().select(this.organiser.organiserTitle).should('have.value', this.organiser.organiserTitle)
-        td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
-        td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.email)
-        td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
-        td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
+        td.orgFname().should('be.visible').should('be.enabled').clear().type('Test')
+        td.orgLname().should('be.visible').should('be.enabled').clear().type('Intervest')
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email_new)
+        td.orgTel().should('be.visible').should('be.enabled').clear().type('0112081880')
+        td.orgPostcode().should('be.visible').should('be.enabled').clear().type('NN47XD')
 
         td.departDate().should('be.visible').should('be.enabled').clear().type(this.quote.departure)
 
@@ -145,8 +145,6 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 003: Save Quote >
         cf.dobYYYY().select(this.organiser.year)
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
-
-        cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
 
         cf.cardType().select('1').should('have.value', '1')
 

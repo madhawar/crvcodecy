@@ -44,7 +44,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 002: Save Quote >
         td.orgTitle().select(this.organiser.organiserTitle).should('have.value', this.organiser.organiserTitle)
         td.orgFname().should('be.visible').should('be.enabled').clear().type(this.organiser.firstname)
         td.orgLname().should('be.visible').should('be.enabled').clear().type(this.organiser.lastname)
-        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email)
+        td.orgEmail().should('be.visible').should('be.enabled').clear().type(this.organiser.selfserv_email_new)
         td.orgTel().should('be.visible').should('be.enabled').clear().type(this.organiser.dayTimeTelephone)
         td.orgPostcode().should('be.visible').should('be.enabled').clear().type(this.organiser.postcode)
 
@@ -163,14 +163,14 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 002: Save Quote >
         const cf = new Confirmation()
 
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
-        cy.wait(4000)  
+        // cy.wait(4000)  
     })
 
     it('Self Serv redirect confirmation popup', function () {
         const cf = new Confirmation()
 
         cy.contains(this.popups.Self_Serv_Redirect_Popup)
-        // cy.wait(4000)
+        cy.wait(4000)
     })
 
     it('Fill & submit credit card details and purchase policy', function () {

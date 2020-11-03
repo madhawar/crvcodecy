@@ -35,7 +35,7 @@ describe('Logged in users should not have Save Quote function', function () {
     it('Login to Self Serv', function() {
         const td = new TravelDetails()
 
-        td.ossi_email().type(this.organiser.selfserv_email)
+        td.ossi_email().type(this.organiser.selfserv_email_new)
         td.ossi_password().type(this.organiser.selfserv_password)
         td.ossi_btn_login().click()
         td.ossi_btn_login_success().click()
@@ -119,7 +119,7 @@ describe('Logged in users should not have Save Quote function', function () {
             }
     
         })            
-            
+        cy.wait(4000)      
     })
 
     it('Submit Quote Results', function() {

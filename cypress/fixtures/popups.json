@@ -1,6 +1,6 @@
 {
     "Password_Validation": "Please enter a Password",
-    "Password_Invalid_Error": "Your password will be 8-20 characters long, using a mix of upper and lower case letters and includes at least one number or special character (e.g. ! or *).",
+    "Password_Invalid_Error": "The email/password combination you have entered does not match any of our records, please try again",
 
     "Travel_Advice_Extension": "Allows cover for travel to a European Destinations where the FCO advise against all but essential travel (Europe cover also includes Egypt, Morocco, Turkey and Tunisia)",
     "Travel_Advice_Extension_Label": "European Travel Advice Extension Cover",
@@ -14,6 +14,11 @@
     "Self_Serv_Redirect": "/mystaysure/my-policies",    
     "Self_Serv_Greeting": "Thank you, your payment has been processed successfully",
     "Self_Serv_My_Current": "My Current Policies",
+
+    "Save_Quote_Button": "Save Your Quote",
+    "Save_Quote_Button_Save": "Save Your Quote",
+    "Save_Quote_Button_Continue": "Continue Quote",
+    "Save_Quote_Button_Return": "Return to Quote",
 
     "Save_Quote_Label": "Not ready to buy yet?",
     "Save_Quote_Password_Condition_1": "8+ Characters long",
