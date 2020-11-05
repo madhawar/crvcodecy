@@ -140,12 +140,12 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 002: Save Quote >
     it('Fill & submit Confirmation', function () {
         const cf = new Confirmation()
 
-        cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
-        cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
+        // cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
+        // cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
 
-        cf.dobYYYY().select(this.organiser.year)
-        cf.dobMM().select(this.organiser.month)
-        cf.dobDD().select(this.organiser.day)
+        // cf.dobYYYY().select(this.organiser.year)
+        // cf.dobMM().select(this.organiser.month)
+        // cf.dobDD().select(this.organiser.day)
 
         // cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
 

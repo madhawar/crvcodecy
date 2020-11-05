@@ -148,14 +148,13 @@ describe('Logged in users should not have Save Quote function', function () {
         const cf = new Confirmation()
         
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
-    })
-
-    it ('Reduirect Popup', function() {
-        const cf = new Confirmation()       
-
-        cy.contains(this.popups.Self_Serv_Redirect_Popup)
         cy.wait(4000)
     })
+
+    // it ('Reduirect Popup', function() {
+    //     cy.contains(this.popups.Self_Serv_Redirect_Popup)
+    //     // cy.wait(4000)
+    // })
 
     it('Barclayscard Smartpay', function () {
         const pm = new Payment()
