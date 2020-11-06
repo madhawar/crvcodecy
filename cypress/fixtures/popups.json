@@ -24,7 +24,7 @@
     "Save_Quote_Password_Condition_1": "8+ Characters long",
     "Save_Quote_Password_Condition_2": "Must use one number or special character",
     "Save_Quote_Password_Condition_3": "Mix of upper and lower case letters",
-    "Save_Quote_New_Account": "You will receive a verification email to create an account and retrieve your quote",
+    "Save_Quote_New_Account": "You will now receive a verification email to create an account and retrieve your quote",
     "Save_Quote_Save_Success": "Your quote has been saved.",
     "Save_Quote_Data_Conflict": "As this email address is already registered, we are unable to save your quote. Please contact customer services.",
     "Save_Quote_Inactive": "This account has not been activated. Please verify your email address using the link you have been sent."
