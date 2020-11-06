@@ -23,7 +23,7 @@ beforeEach(function () {
     })
 })
 
-describe('Logged in users should not have Save Quote function', function () {    
+describe('Online Self Serve Integration - Sprint 4 | Test Case 005: Logged in users should not have Save Quote function', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
