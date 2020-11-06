@@ -163,14 +163,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 002: Save Quote >
         const cf = new Confirmation()
 
         cf.purchasePolicy().should('be.visible').should('be.enabled').click()
-        // cy.wait(4000)  
-    })
-
-    it('Self Serv redirect confirmation popup', function () {
-        const cf = new Confirmation()
-
-        cy.contains(this.popups.Self_Serv_Redirect_Popup)
-        cy.wait(4000)
+        cy.wait(4000)  
     })
 
     it('Fill & submit credit card details and purchase policy', function () {
