@@ -1,10 +1,18 @@
 class Confirmation {
 
+    mandatoryFieldsPopupClose() {
+        return cy.get('.close > .btn')
+    }
+
     addressLine1() {
         return cy.get('#firstLineOfAddress')
     }
     addressCity() {
         return cy.get('#city')
+    }
+
+    emailAddress() {
+        return cy.get('#emailAddress')
     }
 
     dobYYYY() {
@@ -15,6 +23,10 @@ class Confirmation {
     }
     dobDD() {
         return cy.get('#day')
+    }
+
+    documentDelivery() {
+        return cy.get('#postalCopyRequest')
     }
 
     cardType() {

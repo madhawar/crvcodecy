@@ -183,4 +183,42 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote',
         cy.contains(this.popups.Save_Quote_Label).should('not.exist')
     })
 
+    it('Select a policy package', function () {
+        const qr = new QuoteResults()
+
+        // qr.ossi_popup_close().click()
+
+        cy.get('.logo').then(elem => {
+            let alt = elem.attr('alt');
+
+            if (alt === "Staysure") {
+                qr.stComprehensive().should('be.visible').should('be.enabled').click()
+            } else if (alt === "Avanti") {
+                qr.stEssential().should('be.visible').should('be.enabled').click()
+            }
+
+        })
+        cy.wait(4000)
+    })
+
+    it('Select ACOs & submit Quote Results', function () {
+        const qr = new QuoteResults()
+
+        qr.continueOE().should('be.visible').should('be.enabled').click()
+    })
+   
+    it('Fill & submit Confirmation', function () {
+        const cf = new Confirmation()        
+
+        // cf.emailAddress().clear()
+        // cf.mandatoryFieldsPopupClose().click()
+        // cf.documentDelivery().select('1')
+        // cf.mandatoryFieldsPopupClose().click()
+        
+        cf.cardType().select('1').should('have.value', '1')
+
+        cf.userDeclaration().click('left')
+        cf.userAccept().click('left')
+    })
+
 })

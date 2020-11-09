@@ -133,12 +133,12 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 005: Logged in us
 
         // cf.addressLine1().should('be.visible').should('be.enabled').clear().type(this.organiser.address_1)
         // cf.addressCity().should('be.visible').should('be.enabled').clear().type(this.organiser.city)
-
+        
         // cf.dobYYYY().select(this.organiser.year)
         // cf.dobMM().select(this.organiser.month)
         // cf.dobDD().select(this.organiser.day)
-
-        cf.cardType().select('1').should('have.value', '1')
+        
+        cf.cardType().select('1').should('have.value', '1')        
 
         cf.userDeclaration().click('left')
         cf.userAccept().click('left')        
