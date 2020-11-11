@@ -23,7 +23,7 @@ beforeEach(function () {
     })
 })
 
-describe('Online Self Serve Integration - Sprint 4 | Test Case 006: Unregistered user ignores Save Quote and purchase policy [HOTFIX]', function () {    
+describe('Online Self Serve Integration - Sprint 4 | Test Case 007: User register to Self Serv from Confirmation page [HOTFIX]', function () {    
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
@@ -134,8 +134,8 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 006: Unregistered
         cf.dobDD().select(this.organiser.day)
 
         cf.selfServ_Reg_Email().invoke('val').should('not.be.empty')
-        // cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
         cf.selfServ_Reg_Password().invoke('val').should('be.empty')
+        cf.selfServ_Reg_Password().should('be.visible').should('be.enabled').type(this.organiser.selfserv_password)
         
         cf.cardType().select('1').should('have.value', '1')        
 
