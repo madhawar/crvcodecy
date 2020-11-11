@@ -1,16 +1,17 @@
 {
-    "video": false,
-    "screenshotOnRunFailure": true,
-    "chromeWebSecurity": false,
-    "reporter": "cypress-multi-reporters",
-    "reporterOptions": {
-        "reporterEnabled": "mochawesome",
-        "mochawesomeReporterOptions": {
-            "reportDir": "cypress/reports/mocha",
-            "quite": true,
-            "overwrite": true,
-            "html": true,
-            "json": true
-        }
+  "video": false,
+  "screenshotOnRunFailure": true,
+  "chromeWebSecurity": false,
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "reporterEnabled": "mochawesome",
+    "mochawesomeReporterOptions": {
+      "reportDir": "cypress/reports/mocha",
+      "quite": true,
+      "overwrite": true,
+      "html": true,
+      "json": true
     }
+  },
+  "projectId": "bv2jx1"
 }
