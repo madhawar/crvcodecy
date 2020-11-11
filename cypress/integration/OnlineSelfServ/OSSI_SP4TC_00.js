@@ -23,7 +23,7 @@ beforeEach(function () {
     })
 })
 
-describe('Online Self Serve Integration - Sprint 4 | Test Case 000: Save Quote', function () {
+describe('Online Self Serve Integration - Sprint 4 | Test Case 000: User try Save Quote function and create web quote', function () {
 
     it('Get Quote', function () {
         cy.web(this.meta.server, this.meta.domain)
