@@ -221,4 +221,11 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 000: User try Sav
         cf.userAccept().click('left')
     })
 
+    it ('Purchase Policy', function() {
+        const cf = new Confirmation()
+        
+        cf.purchasePolicy().should('be.visible').should('be.enabled').click()
+        cy.wait(4000)
+    })
+
 })

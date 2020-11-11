@@ -133,7 +133,9 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 006: Unregistered
         cf.dobMM().select(this.organiser.month)
         cf.dobDD().select(this.organiser.day)
 
-        // cf.selfServ_Reg_Email().clear()
+        cf.selfServ_Reg_Email().invoke('val').should('not.be.empty')
+        // cf.selfServ_Reg_Email().should('be.visible').should('be.enabled').clear()
+        cf.selfServ_Reg_Password().invoke('val').should('be.empty')
         
         cf.cardType().select('1').should('have.value', '1')        
 
