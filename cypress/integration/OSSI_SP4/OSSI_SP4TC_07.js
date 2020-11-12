@@ -182,7 +182,7 @@ describe('Online Self Serve Integration - Sprint 4 | Test Case 007: User registe
         const ty = new ThankYou()
 
         cy.contains(this.popups.Thank_You_Page_Greeting)
-        ty.SS_Register().should('be.visible')
+        ty.SS_Login().should('be.visible')
     })
   
 })
