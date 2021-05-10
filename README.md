@@ -14,6 +14,8 @@ Installing Cypress
 https://docs.cypress.io/guides/getting-started/installing-cypress.html#npm-install
 ```
 
+Current version: 7.x.x
+
 ## Usage
 
 Visual Studio Code alone is enough to get started. I use following combination of software tools.
